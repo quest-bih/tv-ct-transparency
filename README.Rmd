@@ -1,0 +1,134 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(dplyr)
+library(fs)
+library(readr)
+library(gtsummary)
+```
+
+# TrackValue: Clinical Trial Transparency
+
+This repository supports the clinical trial transparency report card project within TrackValue.
+
+## Trials
+
+The dataset is based on IntoValue with updated registry (ClinicalTrials.gov and DRKS) data from 2021-05-15 (see `intovalue-data` repo). IntoValue inclusion criteria for completion date (2008-2018), status (~completed), and interventional are reapplied on trials with updated registry data.
+
+For TrackValue, we are interested in Charité-affiliated trials from recent years (i.e., more likely PIs are still at Charité), and so limit to IntoValue 2 trials with Charité listed as a lead city.
+
+```{r trackvalue-dataset}
+
+trackvalue <-
+  read_rds(here::here("data", "processed", "trackvalue.rds"))
+
+n_ctgov <-
+  trackvalue %>% 
+  filter(registry == "ClinicalTrials.gov") %>% 
+  nrow()
+
+n_drks <-
+  trackvalue %>% 
+  filter(registry == "DRKS") %>% 
+  nrow()
+```
+
+The TrackValue dataset consists of `r nrow(trackvalue)` trials, including `r n_ctgov` trials from ClinicalTrials.gov and `r n_drks` trials from DRKS.
+
+
+## Report card transparency elements
+TrackValue clinical trial transparency report cards may include various transparency elements. The current frontrunners are: summary results reporting, publication linkage in registry, and open access. The table below provides an overview of the percentage and number of trials per registry which comply with each element.
+
+```{r transparency-elements}
+
+trackvalue %>%
+
+  # Create booleans for whether results are timely
+  #TODO: Team decision, how to decide timeliness? use days or months like with is_prospective? For now use days but may not be the keeper
+  # Note: We don't have DRKS summary results dates so will all be NA
+  # TODO: Team decision: whether to manually get summary results date and whether from pdf or history. N = 1 in our sample!
+  mutate(
+    is_timely_summary_results = if_else(days_cd_to_summary <= 365, TRUE, FALSE),
+    is_timely_publication = if_else(days_cd_to_publication <= 2*365, TRUE, FALSE)
+  ) %>%
+
+  select(
+    registry,
+    is_prospective,
+    has_publication,
+    is_timely_publication,
+    has_summary_results,
+    is_timely_summary_results,
+    has_reg_pub_link,
+    has_iv_trn_abstract,
+    has_iv_trn_ft_pdf
+  ) %>%
+  gtsummary::tbl_summary(
+    by = registry,
+    label = list(
+      is_prospective ~ "Prospective registration",
+      has_publication ~ "Has publication",
+      is_timely_publication ~ "Timely publication (24 mo)",
+      has_summary_results  ~ "Has registry summary results",
+      is_timely_summary_results ~ "Timely summary results (12 mo)",
+      has_reg_pub_link  ~ "Publication linked in registry",
+      has_iv_trn_abstract ~ "TRN reported in abstract",
+      has_iv_trn_ft_pdf ~ "TRN reported in full-text"
+    )
+  ) %>%
+
+  # Move stats legend to each line
+  add_stat_label() %>%
+
+  modify_header(label = "**TrackValue trials transparency elements**") %>%
+
+  bold_labels()
+
+```
+
+
+## EUCTR
+The IntoValue, and hence TrackValue, sample includes trials any interventional study in the registry and is not limited to those regulated by German drug and medical laws. Trials regulated by those rules *should* be registered in EUCTR, rather than ClinicalTrials.gov or DRKS. As such, trials in our sample which are cross-registered in EUCTR are perhaps more likely clinical trials per German law.
+
+```{r euctr-crossreg}
+
+crossreg <-
+  read_rds(here::here("data", "processed", "crossreg.rds"))
+
+tv_euctr_crossreg <-
+  crossreg %>%
+  
+  # Limit to EUCTR cross-registrations (in registry)
+  filter(crossreg_registry == "EudraCT" & is_crossreg_reg) %>%
+  
+  # Add in registry
+  left_join(select(trackvalue, id, registry), by = "id") %>% 
+  
+  # Assert that there is max 1 EUCTR cross-registration per trial
+  assertr::assert(assertr::is_uniq, id)
+
+n_euctr_ctgov <-
+  tv_euctr_crossreg %>% 
+  filter(registry == "ClinicalTrials.gov") %>% 
+  nrow()
+
+n_euctr_drks <-
+  tv_euctr_crossreg %>% 
+  filter(registry == "DRKS") %>% 
+  nrow()
+
+```
+We found that `r nrow(tv_euctr_crossreg)` trials in our sample include an EUCTR id in their registration, including `r n_euctr_ctgov` trials from ClinicalTrials.gov and `r n_euctr_drks` trials from DRKS.
+
+## Open Questions
+- [ ] How to decide timeliness (i.e., `is_timely_summary_results` and `is_timely_publication`)? Option 1 would be to use days (i.e., `days_cd_to_summary` and `days_cd_to_publication`) compared with 365 and 265 times 2 respectivel. Option 2 would be to use a rough/more generous month or year cut (similar to `is_prospective`). Currently, determine based on days.
+- [ ] Our sample does not include dates for DRKS summary results, so that and associated metrics are NA. Should we manually add the summary results date to the TV trial (N = 1)? If so, using the PDF date or the DRKS changes history date?
