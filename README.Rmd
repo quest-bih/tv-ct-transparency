@@ -92,7 +92,8 @@ trackvalue %>%
 
   modify_header(label = "**TrackValue trials transparency elements**") %>%
 
-  bold_labels()
+  bold_labels() %>% 
+  as_gt()
 
 ```
 
