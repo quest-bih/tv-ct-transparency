@@ -47,6 +47,7 @@ The TrackValue dataset consists of `r nrow(trackvalue)` trials, including `r n_c
 
 ## Report card transparency elements
 TrackValue clinical trial transparency report cards may include various transparency elements. The current frontrunners are: summary results reporting, publication linkage in registry, and open access. The table below provides an overview of the percentage and number of trials per registry which comply with each element.
+Note: Open access is not yet in the dataset (@delwen).
 
 ```{r transparency-elements}
 

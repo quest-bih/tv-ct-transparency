@@ -42,7 +42,8 @@ TrackValue clinical trial transparency report cards may include various
 transparency elements. The current frontrunners are: summary results
 reporting, publication linkage in registry, and open access. The table
 below provides an overview of the percentage and number of trials per
-registry which comply with each element.
+registry which comply with each element. Note: Open access is not yet in
+the dataset (@delwen).
 
 ``` r
 trackvalue %>%
@@ -94,7 +95,7 @@ trackvalue %>%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qmdhzujbqi .gt_table {
+#xcotwxuqbf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -119,7 +120,7 @@ trackvalue %>%
   border-left-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_heading {
+#xcotwxuqbf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -131,7 +132,7 @@ trackvalue %>%
   border-right-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_title {
+#xcotwxuqbf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -141,7 +142,7 @@ trackvalue %>%
   border-bottom-width: 0;
 }
 
-#qmdhzujbqi .gt_subtitle {
+#xcotwxuqbf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -151,13 +152,13 @@ trackvalue %>%
   border-top-width: 0;
 }
 
-#qmdhzujbqi .gt_bottom_border {
+#xcotwxuqbf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_col_headings {
+#xcotwxuqbf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -172,7 +173,7 @@ trackvalue %>%
   border-right-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_col_heading {
+#xcotwxuqbf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -192,7 +193,7 @@ trackvalue %>%
   overflow-x: hidden;
 }
 
-#qmdhzujbqi .gt_column_spanner_outer {
+#xcotwxuqbf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -204,15 +205,15 @@ trackvalue %>%
   padding-right: 4px;
 }
 
-#qmdhzujbqi .gt_column_spanner_outer:first-child {
+#xcotwxuqbf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qmdhzujbqi .gt_column_spanner_outer:last-child {
+#xcotwxuqbf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qmdhzujbqi .gt_column_spanner {
+#xcotwxuqbf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -224,7 +225,7 @@ trackvalue %>%
   width: 100%;
 }
 
-#qmdhzujbqi .gt_group_heading {
+#xcotwxuqbf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -246,7 +247,7 @@ trackvalue %>%
   vertical-align: middle;
 }
 
-#qmdhzujbqi .gt_empty_group_heading {
+#xcotwxuqbf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -261,15 +262,15 @@ trackvalue %>%
   vertical-align: middle;
 }
 
-#qmdhzujbqi .gt_from_md > :first-child {
+#xcotwxuqbf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qmdhzujbqi .gt_from_md > :last-child {
+#xcotwxuqbf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qmdhzujbqi .gt_row {
+#xcotwxuqbf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -288,7 +289,7 @@ trackvalue %>%
   overflow-x: hidden;
 }
 
-#qmdhzujbqi .gt_stub {
+#xcotwxuqbf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -300,7 +301,7 @@ trackvalue %>%
   padding-left: 12px;
 }
 
-#qmdhzujbqi .gt_summary_row {
+#xcotwxuqbf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -310,7 +311,7 @@ trackvalue %>%
   padding-right: 5px;
 }
 
-#qmdhzujbqi .gt_first_summary_row {
+#xcotwxuqbf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -320,7 +321,7 @@ trackvalue %>%
   border-top-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_grand_summary_row {
+#xcotwxuqbf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -330,7 +331,7 @@ trackvalue %>%
   padding-right: 5px;
 }
 
-#qmdhzujbqi .gt_first_grand_summary_row {
+#xcotwxuqbf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -340,11 +341,11 @@ trackvalue %>%
   border-top-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_striped {
+#xcotwxuqbf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qmdhzujbqi .gt_table_body {
+#xcotwxuqbf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -353,7 +354,7 @@ trackvalue %>%
   border-bottom-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_footnotes {
+#xcotwxuqbf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -367,13 +368,13 @@ trackvalue %>%
   border-right-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_footnote {
+#xcotwxuqbf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qmdhzujbqi .gt_sourcenotes {
+#xcotwxuqbf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -387,46 +388,46 @@ trackvalue %>%
   border-right-color: #D3D3D3;
 }
 
-#qmdhzujbqi .gt_sourcenote {
+#xcotwxuqbf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qmdhzujbqi .gt_left {
+#xcotwxuqbf .gt_left {
   text-align: left;
 }
 
-#qmdhzujbqi .gt_center {
+#xcotwxuqbf .gt_center {
   text-align: center;
 }
 
-#qmdhzujbqi .gt_right {
+#xcotwxuqbf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qmdhzujbqi .gt_font_normal {
+#xcotwxuqbf .gt_font_normal {
   font-weight: normal;
 }
 
-#qmdhzujbqi .gt_font_bold {
+#xcotwxuqbf .gt_font_bold {
   font-weight: bold;
 }
 
-#qmdhzujbqi .gt_font_italic {
+#xcotwxuqbf .gt_font_italic {
   font-style: italic;
 }
 
-#qmdhzujbqi .gt_super {
+#xcotwxuqbf .gt_super {
   font-size: 65%;
 }
 
-#qmdhzujbqi .gt_footnote_marks {
+#xcotwxuqbf .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="qmdhzujbqi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="xcotwxuqbf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
