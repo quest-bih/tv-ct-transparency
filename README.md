@@ -57,10 +57,10 @@ trials per registry which comply with each element.
 |:--------------------------------------------|:--------------------------------|:-----------------|
 | **Prospective registration, n (%)**         | 99 (66%)                        | 8 (38%)          |
 | **Has registry summary results, n (%)**     | 16 (11%)                        | 1 (4.8%)         |
-| **Timely summary results (12 mo), n (%)**   | 0 (NA%)                         | 0 (0%)           |
-| Unknown                                     | 151                             | 20               |
-| **Timely summary results (24 mo), n (%)**   | 0 (NA%)                         | 1 (100%)         |
-| Unknown                                     | 151                             | 20               |
+| **Timely summary results (12 mo), n (%)**   | 10 (62%)                        | 0 (0%)           |
+| Unknown                                     | 135                             | 20               |
+| **Timely summary results (24 mo), n (%)**   | 15 (94%)                        | 1 (100%)         |
+| Unknown                                     | 135                             | 20               |
 | **Has publication, n (%)**                  | 99 (66%)                        | 16 (76%)         |
 | **Timely publication (24 mo), n (%)**       | 51 (52%)                        | 9 (56%)          |
 | Unknown                                     | 52                              | 5                |
