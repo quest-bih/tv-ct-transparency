@@ -70,10 +70,10 @@ trials per registry which comply with each element.
 | Unknown                                     | 59                              | 6                |
 | **Publication linked in registry, n (%)**   | 53 (55%)                        | 5 (31%)          |
 | Unknown                                     | 54                              | 5                |
-| **Openly accessible, n (%)**                | 58 (60%)                        | 8 (50%)          |
+| **Openly accessible, n (%)**                | 60 (62%)                        | 8 (50%)          |
 | Unknown                                     | 55                              | 5                |
-| **Closed, archivable, n (%)**               | 33 (94%)                        | 6 (86%)          |
-| Unknown                                     | 116                             | 14               |
+| **Closed, archivable, n (%)**               | 33 (100%)                       | 6 (86%)          |
+| Unknown                                     | 118                             | 14               |
 
 ## EUCTR
 
