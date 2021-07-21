@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-
+import argparse
 import copy
+import os
 import subprocess
 import sys
 from lxml import etree
@@ -88,7 +89,20 @@ def gen_registry_url(row):
 
 
 def main():
-    infile = sys.argv[1]
+    parser = argparse.ArgumentParser(description='Create report cards')
+    parser.add_argument('template', metavar='TEMPLATE', type=str,
+                        help='The template to use')
+    parser.add_argument('data', metavar='DATA', type=str,
+                        help='The data to use (.csv file)')
+    parser.add_argument('--outdir', metavar='DIR', type=str,
+                        default=os.getcwd(), dest="outdir",
+                        help='Where to store the output (default: current work dir)')
+
+    args = parser.parse_args()
+
+    os.makedirs(args.outdir, exist_ok=True)
+
+    infile = args.template
 
     with open(infile, "rb") as f:
         data = f.read()
@@ -106,8 +120,8 @@ def main():
     # Build a set of all layers
     all_layers = get_all_layers(layers)
 
-    # Read in the data with trial-specific characteristics TODO: change this to TV dataset and use whole dataset!
-    data = pd.read_csv("ct-dashboard-intovalue.csv")[:5]
+    # Read in the data with trial-specific characteristics
+    data = pd.read_csv(args.data)
 
     # Iterate over each trial and select template to be used for each module
     for _, row in data.iterrows():
@@ -115,7 +129,7 @@ def main():
         root = copy.deepcopy(template)
         included_layers = set()
         name = row['id']
-        outfile = f"{name}.svg"
+        outfile = os.path.join(args.outdir, f"{name}.svg")
 
         # Add correct TRN
         replace(root, "text", "TRN", row['id'], gen_registry_url(row))
@@ -199,7 +213,7 @@ def main():
         with open(outfile, "wb") as f:
             f.write(out)
 
-        outpdf = f"{name}.pdf"
+        outpdf = os.path.join(args.outdir, f"{name}.pdf")
 
         # Convert modified SVG to PDF with inkscape (open source)
         subprocess.run([
