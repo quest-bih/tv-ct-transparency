@@ -17,6 +17,7 @@ trackvalue <-
   filter(iv_completion, iv_status, iv_interventional)
 
 readr::write_rds(trackvalue, fs::path(dir, "trackvalue.rds"))
+readr::write_csv(trackvalue, fs::path(dir, "trackvalue.csv"))
 
 # Limit to cross-registrations of trials included in trackvalue
 trackvalue_crossreg <-
