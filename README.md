@@ -8,18 +8,26 @@ project within TrackValue.
 
 ## Trials
 
-The dataset is based on IntoValue with updated registry
-(ClinicalTrials.gov and DRKS) data from 2021-05-15 (see
-[`intovalue-data` repo](https://github.com/maia-sh/intovalue-data)).
-IntoValue inclusion criteria for completion date (2008-2018), status
-(\~completed), and interventional are reapplied on trials with updated
-registry data.
+The dataset is based on
+[IntoValue](https://doi.org/10.5281/zenodo.5141343) with updated data;
+see [`intovalue-data` repo](https://github.com/maia-sh/intovalue-data))
+for futher details on the dataset. IntoValue inclusion criteria for
+completion date (2008-2018), completion status, and interventional are
+reapplied on trials with updated registry data.
+
+The data was last updated on the following dates:
+
+-   PubMed: 2021-08-15
+-   AACT (ClinicalTrials.gov): 2021-08-15
+-   DRKS: 2021-08-15
+-   Unpaywall: 2021-08-15
+-   ShareYourPaper: 2021-07-23
 
 For TrackValue, we are interested in Charité-affiliated trials from
 recent years (i.e., more likely PIs are still at Charité), and so limit
 to IntoValue 2 trials with Charité listed as a lead city.
 
-The TrackValue dataset consists of 172 trials, including 151 trials from
+The TrackValue dataset consists of 171 trials, including 150 trials from
 ClinicalTrials.gov and 21 trials from DRKS.
 
 ## Report card transparency elements
@@ -32,15 +40,25 @@ potential elements are included below.
 ### Outline
 
 -   registration (boolean)
+
     -   if registration –> registration (timely)
+
 -   summary results (boolean)
+
     -   if summary results –> summary results (timely)
+
 -   publication (boolean)
+
     -   if publication –> publication (timely)
+
     -   if publication –> trn in journal publication (full-text)
+
     -   if publication –> trn in journal publication (abstract)
+
     -   if publication –> publication in registration
+
     -   if publication –> open access (closed/open)
+
         -   if publication –> if closed –> open access (can/not be
             archived)
 
@@ -53,27 +71,27 @@ items (registration timeliness, summary results, publication closed).
 The table below provides an overview of the percentage and number of
 trials per registry which comply with each element.
 
-| **TrackValue trials transparency elements** | **ClinicalTrials.gov**, N = 151 | **DRKS**, N = 21 |
+| **TrackValue trials transparency elements** | **ClinicalTrials.gov**, N = 150 | **DRKS**, N = 21 |
 |:--------------------------------------------|:--------------------------------|:-----------------|
-| **Prospective registration, n (%)**         | 99 (66%)                        | 8 (38%)          |
-| **Has registry summary results, n (%)**     | 16 (11%)                        | 1 (4.8%)         |
-| **Timely summary results (12 mo), n (%)**   | 10 (62%)                        | 0 (0%)           |
-| Unknown                                     | 135                             | 20               |
-| **Timely summary results (24 mo), n (%)**   | 15 (94%)                        | 1 (100%)         |
-| Unknown                                     | 135                             | 20               |
-| **Has publication, n (%)**                  | 99 (66%)                        | 16 (76%)         |
-| **Timely publication (24 mo), n (%)**       | 51 (52%)                        | 9 (56%)          |
+| **Prospective registration, n (%)**         | 98 (65%)                        | 8 (38%)          |
+| **Has registry summary results, n (%)**     | 17 (11%)                        | 1 (4.8%)         |
+| **Timely summary results (12 mo), n (%)**   | 10 (59%)                        | 0 (0%)           |
+| Unknown                                     | 133                             | 20               |
+| **Timely summary results (24 mo), n (%)**   | 15 (88%)                        | 1 (100%)         |
+| Unknown                                     | 133                             | 20               |
+| **Has publication, n (%)**                  | 96 (64%)                        | 16 (76%)         |
+| **Timely publication (24 mo), n (%)**       | 50 (51%)                        | 9 (56%)          |
 | Unknown                                     | 52                              | 5                |
-| **TRN reported in abstract, n (%)**         | 39 (42%)                        | 1 (6.7%)         |
+| **TRN reported in abstract, n (%)**         | 39 (43%)                        | 1 (6.7%)         |
 | Unknown                                     | 59                              | 6                |
 | **TRN reported in full-text, n (%)**        | 53 (58%)                        | 6 (40%)          |
 | Unknown                                     | 59                              | 6                |
-| **Publication linked in registry, n (%)**   | 53 (55%)                        | 5 (31%)          |
+| **Publication linked in registry, n (%)**   | 51 (53%)                        | 5 (31%)          |
 | Unknown                                     | 54                              | 5                |
-| **Openly accessible, n (%)**                | 60 (62%)                        | 8 (50%)          |
+| **Openly accessible, n (%)**                | 49 (52%)                        | 6 (38%)          |
 | Unknown                                     | 55                              | 5                |
-| **Closed, archivable, n (%)**               | 33 (100%)                       | 6 (86%)          |
-| Unknown                                     | 118                             | 14               |
+| **Closed, archivable, n (%)**               | 42 (98%)                        | 9 (100%)         |
+| Unknown                                     | 107                             | 12               |
 
 ## EUCTR
 
