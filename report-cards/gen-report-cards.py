@@ -145,13 +145,7 @@ TABLE = {
                                 "id": "summary_results_3_link",
                                 "url": gen_registry_url,
                                 "text": id_for_publication
-                            }},
-                    np.NaN: {"layer": "summary_results_layer_4",
-                             "link": {
-                                 "id": "summary_results_4_link",
-                                 "url": gen_registry_url,
-                                 "text": id_for_publication
-                             }}
+                            }}
                 }
 
             }
@@ -173,13 +167,7 @@ TABLE = {
                                 "id": "publication_3_link",
                                 "url": url_for_publication,
                                 "text": doi_for_publication
-                            }},
-                    np.NaN: {"layer": "publication_layer_4",
-                             "link": {
-                                 "id": "publication_4_link",
-                                 "url": url_for_publication,
-                                 "text": doi_for_publication
-                             }}
+                            }}
                 }
             }
         }
@@ -188,10 +176,9 @@ TABLE = {
         "has_publication": {
             False: {"layer": "linkage_layer_na"},
             True: {
-                "has_iv_trn_ft_pdf": {
-                    np.NaN: {"layer": "linkage_layer_1"},
-                    True: {"layer": "linkage_layer_2"},
-                    False: {"layer": "linkage_layer_3"}}
+                "has_iv_trn_ft": {
+                    True: {"layer": "linkage_layer_1"},
+                    False: {"layer": "linkage_layer_2"}}
             }
         }
     },
@@ -200,9 +187,8 @@ TABLE = {
             False: {"layer": "linkage_layer_na"},
             True: {
                 "has_iv_trn_abstract": {
-                    np.NaN: {"layer": "linkage_layer_4"},
-                    True: {"layer": "linkage_layer_5"},
-                    False: {"layer": "linkage_layer_6"}
+                    True: {"layer": "linkage_layer_3"},
+                    False: {"layer": "linkage_layer_4"}
                 }
             }
         }
@@ -212,9 +198,8 @@ TABLE = {
             False: {"layer": "linkage_layer_na"},
             True: {
                 "has_reg_pub_link": {
-                    np.NaN: {"layer": "linkage_layer_7"},
-                    True: {"layer": "linkage_layer_8"},
-                    False: {"layer": "linkage_layer_9"}
+                    True: {"layer": "linkage_layer_5"},
+                    False: {"layer": "linkage_layer_6"}
                 }
             }
         }
@@ -252,9 +237,9 @@ def main():
 
     # Define layer characteristics in each module
     layers = [{'name': 'registration', 'number': 2, 'na': False},
-              {'name': 'summary_results', 'number': 4, 'na': False},
-              {'name': 'publication', 'number': 4, 'na': False},
-              {'name': 'linkage', 'number': 9, 'na': True},
+              {'name': 'summary_results', 'number': 3, 'na': False},
+              {'name': 'publication', 'number': 3, 'na': False},
+              {'name': 'linkage', 'number': 6, 'na': True},
               {'name': 'open_access', 'number': 5, 'na': True}]
 
     # Build a set of all layers
