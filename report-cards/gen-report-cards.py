@@ -256,8 +256,14 @@ def main():
         name = row['id']
         outfile = os.path.join(args.outdir, f"{name}.svg")
 
-        # Add correct TRN
+        # Add trial registration number
         replace(root, "text", "TRN", row['id'], gen_registry_url(row))
+        # Add title of trial
+        title = row['title']
+        cutoff = 80
+        if len(title) > cutoff:
+            title = title[0:cutoff] + "…"
+        replace(root, "text", "title", title, gen_registry_url(row))
 
         for key, value in TABLE.items():
             if key.startswith("#"):
