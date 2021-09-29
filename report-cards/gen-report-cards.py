@@ -102,12 +102,16 @@ def id_for_publication(row):
     return row["id"]
 
 
-def doi_for_publication(row):
-    doi = row['doi']
-    if not isinstance(doi, str):
-        if np.isnan(doi):
-            doi = "no DOI available"
-    return doi
+def get_publication_title(row):
+    pub_title = (row['pub_title'])
+    if not isinstance(pub_title, str):
+        if np.isnan(pub_title):
+            pub_title = "title not found (doi: " + row['doi'] + ")"
+    pub_title = pub_title.title()
+    cutoff = 50
+    if len(pub_title) > cutoff:
+        pub_title = pub_title[0:cutoff] + "…"
+    return pub_title
 
 
 TABLE = {
@@ -160,13 +164,13 @@ TABLE = {
                            "link": {
                                "id": "publication_2_link",
                                "url": url_for_publication,
-                               "text": doi_for_publication
+                               "text": get_publication_title
                            }},
                     False: {"layer": "publication_layer_3",
                             "link": {
                                 "id": "publication_3_link",
                                 "url": url_for_publication,
-                                "text": doi_for_publication
+                                "text": get_publication_title
                             }}
                 }
             }
