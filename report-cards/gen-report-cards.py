@@ -344,7 +344,7 @@ def main():
         replace(root, "text", "TRN", row['id'], gen_registry_url(row))
         # Add title of trial
         title = row['title']
-        cutoff = 80
+        cutoff = 60
         if len(title) > cutoff:
             title = title[0:cutoff] + "…"
         replace(root, "text", "title", title, gen_registry_url(row))
