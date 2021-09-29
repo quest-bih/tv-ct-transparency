@@ -114,6 +114,14 @@ def get_publication_title(row):
     return pub_title
 
 
+def get_registry_name(row):
+    registry = row['registry']
+    if not isinstance(registry, str):
+        if np.isnan(registry):
+            registry = "no registry information available"
+    return registry
+
+
 TABLE = {
     "#open_access": {
         "has_publication": {
@@ -135,7 +143,11 @@ TABLE = {
     },
     "#summary_results": {
         "has_summary_results": {
-            False: {"layer": "summary_results_layer_1"},
+            False: {"layer": "summary_results_layer_1",
+                    "registry": {
+                        "id": "summary_results_1_registry",
+                        "text": get_registry_name
+                    }},
             True: {
                 "is_summary_results_1y": {
                     True: {"layer": "summary_results_layer_2",
@@ -143,12 +155,20 @@ TABLE = {
                                "id": "summary_results_2_link",
                                "url": gen_registry_url,
                                "text": id_for_publication
+                           },
+                           "registry": {
+                               "id": "summary_results_2_registry",
+                               "text": get_registry_name
                            }},
                     False: {"layer": "summary_results_layer_3",
                             "link": {
                                 "id": "summary_results_3_link",
                                 "url": gen_registry_url,
                                 "text": id_for_publication
+                            },
+                            "registry": {
+                                "id": "summary_results_3_registry",
+                                "text": get_registry_name,
                             }}
                 }
 
@@ -349,6 +369,11 @@ def main():
                 the_id = link["id"]
                 text = link["text"](row)
                 replace(root, "text", the_id, text, url)
+            registry = element.get("registry")
+            if registry:
+                the_id = registry["id"]
+                text = registry["text"](row)
+                replace(root, "text", the_id, text)
 
         # Define which layers need to be excluded for this trial
         layers_to_exclude = all_layers - included_layers
