@@ -17,6 +17,7 @@ library(dplyr)
 library(fs)
 library(readr)
 library(gtsummary)
+library(stringr)
 ```
 
 # TrackValue: Clinical Trial Transparency
@@ -136,15 +137,25 @@ trackvalue %>%
     )
   ) %>%
 
+  add_overall() %>%
+  
   # Move stats legend to each line
   add_stat_label() %>%
 
   modify_header(label = "**TrackValue trials transparency elements**") %>%
 
-  bold_labels() %>% 
+  bold_labels() #%>% 
   as_kable()
 
 ```
+
+## Trials for intervention outcome measures
+
+Summary results reporting: `r trackvalue %>% filter(!has_summary_results) %>% nrow()`
+
+Publication link in registration: `r trackvalue %>% filter(has_publication & !has_reg_pub_link) %>% nrow()`
+
+Green OA publication: `r trackvalue %>% filter(has_publication & is_closed_archivable) %>% nrow()`
 
 ## EUCTR
 

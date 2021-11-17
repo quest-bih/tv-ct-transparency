@@ -64,6 +64,10 @@ trackvalue %>%
          # is_closed_archivable #TODO: DELWEN
   )
 
+# NOTE: some trials with non-journal article publication have data for publication metrics; could convert to NA or simply disregard via filtering
+trackvalue %>%
+  count(!has_publication & is_publication_2y)
+
 # Trials with publication but missing unpaywall/syp
 # TODO:Delwen, resolve these either by filling in missing data or clarifying meaning of NA so clear in report card
 #

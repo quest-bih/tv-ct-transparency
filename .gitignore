@@ -7,3 +7,6 @@
 report-cards/.idea/
 report-cards/venv/
 .idea/
+
+# Documents to store locally
+docs/
