@@ -10,3 +10,6 @@ report-cards/venv/
 
 # Documents to store locally
 docs/
+
+# PDFs
+data/manual/euctr-crossreg-pdfs
