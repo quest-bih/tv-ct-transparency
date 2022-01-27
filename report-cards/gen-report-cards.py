@@ -134,7 +134,7 @@ TABLE = {
                         "is_closed_archivable": {
                             True: {"layer": "open_access_layer_3"},
                             False: {"layer": "open_access_layer_4"},
-                            np.NaN: {"layer": "open_access_layer_5"}
+                            np.NaN: {"layer": "open_access_layer_4"}
                         }
                     }
                 }
@@ -145,29 +145,19 @@ TABLE = {
         "has_summary_results": {
             False: {"layer": "summary_results_layer_1",
                     "registry": {
-                        "id": "summary_results_1_registry",
+                        "id": "summary_results_1a_registry",
                         "text": get_registry_name
                     }},
             True: {
                 "is_summary_results_1y": {
                     True: {"layer": "summary_results_layer_2",
-                           "link": {
-                               "id": "summary_results_2_link",
-                               "url": gen_registry_url,
-                               "text": id_for_publication
-                           },
                            "registry": {
-                               "id": "summary_results_2_registry",
+                               "id": "summary_results_2a_registry",
                                "text": get_registry_name
                            }},
                     False: {"layer": "summary_results_layer_3",
-                            "link": {
-                                "id": "summary_results_3_link",
-                                "url": gen_registry_url,
-                                "text": id_for_publication
-                            },
                             "registry": {
-                                "id": "summary_results_3_registry",
+                                "id": "summary_results_3a_registry",
                                 "text": get_registry_name,
                             }}
                 }
@@ -230,8 +220,16 @@ TABLE = {
     },
     "#registration": {
         "is_prospective": {
-            True: {"layer": "registration_layer_1"},
-            False: {"layer": "registration_layer_2"}
+            True: {"layer": "registration_layer_1",
+                   "registry": {
+                       "id": "registration_1_registry",
+                       "text": get_registry_name
+                   }},
+            False: {"layer": "registration_layer_2",
+                    "registry": {
+                        "id": "registration_2_registry",
+                        "text": get_registry_name
+                    }}
         }
     }
 }
@@ -264,7 +262,7 @@ def main():
               {'name': 'summary_results', 'number': 3, 'na': False},
               {'name': 'publication', 'number': 3, 'na': False},
               {'name': 'linkage', 'number': 6, 'na': True},
-              {'name': 'open_access', 'number': 5, 'na': True}]
+              {'name': 'open_access', 'number': 4, 'na': True}]
 
     # Build a set of all layers
     all_layers = get_all_layers(layers)
@@ -284,10 +282,10 @@ def main():
         replace(root, "text", "TRN", row['id'], gen_registry_url(row))
         # Add title of trial
         title = row['title']
-        cutoff = 60
+        cutoff = 80
         if len(title) > cutoff:
             title = title[0:cutoff] + "…"
-        replace(root, "text", "title", title, gen_registry_url(row))
+        replace(root, "text", "title", title)
 
         for key, value in TABLE.items():
             if key.startswith("#"):
