@@ -52,32 +52,30 @@ trackvalue %>%
   filter(has_summary_results) %>%
   assert(in_set(TRUE, FALSE, allow.na = FALSE), is_summary_results_1y, is_summary_results_2y)
 
-# We expect all trials with publication to have T/F for publication metrics (timeliness, trn, open access)
+# We expect all trials with publication to have T/F for publication metrics (timeliness, trn)
 trackvalue %>%
   filter(has_publication) %>%
   assert(in_set(TRUE, FALSE, allow.na = FALSE),
          is_publication_2y,
          has_iv_trn_abstract,
          has_iv_trn_ft,
-         has_reg_pub_link,
-         # is_oa, #TODO: DELWEN
-         # is_closed_archivable #TODO: DELWEN
+         has_reg_pub_link
   )
 
 # Trials with publication but missing unpaywall/syp
-# TODO:Delwen, resolve these either by filling in missing data or clarifying meaning of NA so clear in report card
-#
-# missing_unpaywall <-
-#   trackvalue %>%
-#   filter(has_publication) %>%
-#   filter(is.na(is_oa)) %>%
-#   select(id, pmid, doi, url, is_oa)
-#
-# missing_syp <-
-#   trackvalue %>%
-#   filter(has_publication) %>%
-#   filter(is.na(is_closed_archivable)) %>%
-#   select(id, pmid, doi, url, is_oa)
+
+missing_unpaywall <-
+  trackvalue %>%
+  filter(has_publication) %>%
+  filter(is.na(is_oa)) %>%
+  select(id, pmid, doi, url, is_oa)
+
+missing_syp <-
+  trackvalue %>%
+  filter(has_publication) %>%
+  filter(color == "closed") %>%
+  filter(is.na(is_closed_archivable)) %>%
+  select(id, pmid, doi, url, color, is_closed_archivable)
 
 readr::write_csv(trackvalue, fs::path(dir, "trackvalue.csv"))
 
