@@ -144,7 +144,7 @@ trackvalue %>%
 
   modify_header(label = "**TrackValue trials transparency elements**") %>%
 
-  bold_labels() #%>% 
+  bold_labels() %>% 
   as_kable()
 
 ```
@@ -157,11 +157,11 @@ Publication link in registration: `r trackvalue %>% filter(has_publication & !ha
 
 Green OA publication: `r trackvalue %>% filter(has_publication & is_closed_archivable) %>% nrow()`
 
-## EUCTR
+## EUCTR and other cross-registrations
 
-The IntoValue, and hence TrackValue, sample includes trials any interventional study in the registry and is not limited to those regulated by German drug and medical laws. Trials regulated by those rules *should* be registered in EUCTR, rather than ClinicalTrials.gov or DRKS. As such, trials in our sample which are cross-registered in EUCTR are perhaps more likely clinical trials per German law.
+The IntoValue, and hence TrackValue, sample includes trials any interventional study in the registry and is not limited to those regulated by German drug and medical laws. Trials regulated by those rules *should* be registered in EUCTR, rather than ClinicalTrials.gov or DRKS. As such, trials in our sample which are cross-registered in EUCTR are perhaps more likely clinical trials per German law (and may be more likely to fulfil transparency requirements - note: todo).
 
-```{r euctr-crossreg}
+```{r crossreg}
 
 tbl_euctr <-
   trackvalue %>% 
@@ -177,9 +177,22 @@ tbl_euctr <-
   )
 
 # as_kable(tbl_euctr)
+
+crossreg <-  read_csv(here::here("data", "processed", "crossreg.csv"), show_col_types = FALSE)
+
+n_trials_w_crossreg <- n_distinct(crossreg$id)
 ```
 
-We found that `r inline_text(tbl_euctr, row_level = "TRUE", col_level = "Total")` trials in our sample include an EUCTR id in their registration, and are presumably cross-registered in EUCTR. This includes `r inline_text(tbl_euctr, row_level = "TRUE", col_level = "ClinicalTrials.gov")` trials from ClinicalTrials.gov and `r inline_text(tbl_euctr, row_level = "TRUE", col_level = "DRKS")` trials from DRKS.
+We found that `r inline_text(tbl_euctr, row_level = "TRUE", col_level = "Total")` trials in our sample include one or more EUCTR ids in their registration, and are presumably cross-registered in EUCTR. This includes `r inline_text(tbl_euctr, row_level = "TRUE", col_level = "ClinicalTrials.gov")` trials from ClinicalTrials.gov and `r inline_text(tbl_euctr, row_level = "TRUE", col_level = "DRKS")` trials from DRKS.
+
+Considering TRNs both in the registry as well as in the publication, we find additional potential cross-registrations in EUCTR as well as in other registries (N = `r n_trials_w_crossreg`).
+
+```{r all-crossreg}
+crossreg %>% 
+  count(crossreg_registry, name = "n_crossreg") %>% 
+  arrange(desc(n_crossreg)) %>% 
+  knitr::kable()
+```
 
 ## Open Questions
 

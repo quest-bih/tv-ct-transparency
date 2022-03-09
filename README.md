@@ -71,27 +71,35 @@ items (registration timeliness, summary results, publication closed).
 The table below provides an overview of the percentage and number of
 trials per registry which comply with each element.
 
-| **TrackValue trials transparency elements** | **ClinicalTrials.gov**, N = 150 | **DRKS**, N = 21 |
-|:--------------------------------------------|:--------------------------------|:-----------------|
-| **Prospective registration, n (%)**         | 98 (65%)                        | 8 (38%)          |
-| **Has registry summary results, n (%)**     | 17 (11%)                        | 1 (4.8%)         |
-| **Timely summary results (12 mo), n (%)**   | 10 (59%)                        | 0 (0%)           |
-| Unknown                                     | 133                             | 20               |
-| **Timely summary results (24 mo), n (%)**   | 15 (88%)                        | 1 (100%)         |
-| Unknown                                     | 133                             | 20               |
-| **Has publication, n (%)**                  | 96 (64%)                        | 16 (76%)         |
-| **Timely publication (24 mo), n (%)**       | 50 (51%)                        | 9 (56%)          |
-| Unknown                                     | 52                              | 5                |
-| **TRN reported in abstract, n (%)**         | 39 (43%)                        | 1 (6.7%)         |
-| Unknown                                     | 59                              | 6                |
-| **TRN reported in full-text, n (%)**        | 53 (58%)                        | 6 (40%)          |
-| Unknown                                     | 59                              | 6                |
-| **Publication linked in registry, n (%)**   | 51 (53%)                        | 5 (31%)          |
-| Unknown                                     | 54                              | 5                |
-| **Openly accessible, n (%)**                | 49 (52%)                        | 6 (38%)          |
-| Unknown                                     | 55                              | 5                |
-| **Closed, archivable, n (%)**               | 42 (98%)                        | 9 (100%)         |
-| Unknown                                     | 107                             | 12               |
+| **TrackValue trials transparency elements** | **Overall**, N = 171 | **ClinicalTrials.gov**, N = 150 | **DRKS**, N = 21 |
+|:--------------------------------------------|:---------------------|:--------------------------------|:-----------------|
+| **Prospective registration, n (%)**         | 106 (62%)            | 98 (65%)                        | 8 (38%)          |
+| **Has registry summary results, n (%)**     | 18 (11%)             | 17 (11%)                        | 1 (4.8%)         |
+| **Timely summary results (12 mo), n (%)**   | 10 (56%)             | 10 (59%)                        | 0 (0%)           |
+| Unknown                                     | 153                  | 133                             | 20               |
+| **Timely summary results (24 mo), n (%)**   | 16 (89%)             | 15 (88%)                        | 1 (100%)         |
+| Unknown                                     | 153                  | 133                             | 20               |
+| **Has publication, n (%)**                  | 108 (63%)            | 92 (61%)                        | 16 (76%)         |
+| **Timely publication (24 mo), n (%)**       | 59 (52%)             | 50 (51%)                        | 9 (56%)          |
+| Unknown                                     | 57                   | 52                              | 5                |
+| **TRN reported in abstract, n (%)**         | 41 (38%)             | 39 (42%)                        | 2 (12%)          |
+| Unknown                                     | 63                   | 58                              | 5                |
+| **TRN reported in full-text, n (%)**        | 61 (56%)             | 54 (59%)                        | 7 (44%)          |
+| Unknown                                     | 63                   | 58                              | 5                |
+| **Publication linked in registry, n (%)**   | 56 (50%)             | 51 (53%)                        | 5 (31%)          |
+| Unknown                                     | 58                   | 53                              | 5                |
+| **Openly accessible, n (%)**                | 55 (50%)             | 49 (52%)                        | 6 (38%)          |
+| Unknown                                     | 60                   | 55                              | 5                |
+| **Closed, archivable, n (%)**               | 51 (98%)             | 42 (98%)                        | 9 (100%)         |
+| Unknown                                     | 119                  | 107                             | 12               |
+
+## Trials for intervention outcome measures
+
+Summary results reporting: 153
+
+Publication link in registration: 52
+
+Green OA publication: 48
 
 ## EUCTR
 
@@ -106,6 +114,17 @@ We found that 27 (16%) trials in our sample include an EUCTR id in their
 registration, and are presumably cross-registered in EUCTR. This
 includes 23 (15%) trials from ClinicalTrials.gov and 4 (19%) trials from
 DRKS.
+
+Considering TRNs both in the registry as well as in the publication, we
+find additional potential cross-registrations in EUCTR as well as in
+other registries (N = 41).
+
+| crossreg_registry  | n_crossreg |
+|:-------------------|-----------:|
+| EudraCT            |         38 |
+| ClinicalTrials.gov |         17 |
+| DRKS               |          5 |
+| ISRCTN             |          1 |
 
 ## Open Questions
 
