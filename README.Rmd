@@ -53,7 +53,7 @@ get_latest_query <- function(query, logs) {
 
 ## Trials
 
-The dataset is based on [IntoValue](https://doi.org/10.5281/zenodo.5141343) with updated data; see [`intovalue-data` repo](https://github.com/maia-sh/intovalue-data)) for futher details on the dataset. IntoValue inclusion criteria for completion date (2008-2018), completion status, and interventional are reapplied on trials with updated registry data.
+The dataset is based on [IntoValue](https://doi.org/10.5281/zenodo.5141343) with updated data; see [`intovalue-data` repo](https://github.com/maia-sh/intovalue-data) for futher details on the dataset. IntoValue inclusion criteria for completion date (2008-2018), completion status, and interventional are reapplied on trials with updated registry data.
 
 The data was last updated on the following dates:
 
@@ -193,8 +193,3 @@ crossreg %>%
   arrange(desc(n_crossreg)) %>% 
   knitr::kable()
 ```
-
-## Open Questions
-
--   [ ] Timely summary results within 1 or 2 years? Or could use continuous time.
--   [ ] Should we exclude trials likely cross-registered in EUCTR?

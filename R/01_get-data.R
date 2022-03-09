@@ -8,7 +8,7 @@ dir <- dir_create(here::here("data", "raw"))
 # QUERY LOGS --------------------------------------------------------------
 
 download.file(
-  "https://github.com/maia-sh/intovalue-data/raw/6b97fb62804aae1bab6c85bd2817baa027207bab/queries.log",
+  "https://raw.githubusercontent.com/maia-sh/intovalue-data/main/queries.log",
   here::here("data", "queries.log")
 )
 
