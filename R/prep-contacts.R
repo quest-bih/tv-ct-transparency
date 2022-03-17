@@ -153,7 +153,7 @@ h_ctgov_contacts <-
     organization = if_else(name %in% c("Novartis Pharmaceuticals", "Medtronic Clinical Studies", "Galderma", "Glycotope GmbH"), name, organization),
     name = if_else(name %in% c("Novartis Pharmaceuticals", "Medtronic Clinical Studies", "Galderma", "Glycotope GmbH"), NA_character_, name)
   ) %>%
-  # Use \n to split name and title(s)
+  # Use ", " to split name and title(s)
   # Additional pieces go in title; if only one piece, name
   separate(name, c("name", "title"), sep = ", ", extra = "merge", fill = "right") %>%
 
