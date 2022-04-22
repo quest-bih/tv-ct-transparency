@@ -121,6 +121,20 @@ def get_registry_name(row):
             registry = "no registry information available"
     return registry
 
+def get_days_reg_to_start(row):
+    days_reg_to_start = row['days_reg_to_start']
+    if not isinstance(days_reg_to_start, str):
+        if np.isnan(days_reg_to_start):
+            days_reg_to_start = "no information available on days reg to start"
+    return days_reg_to_start
+
+def get_start_date(row):
+    start_date = row['start_date']
+    if not isinstance(start_date, str):
+        if np.isnan(start_date):
+            start_date = "no information available on start date"
+    return start_date
+
 
 TABLE = {
     "#open_access": {
@@ -145,19 +159,19 @@ TABLE = {
         "has_summary_results": {
             False: {"layer": "summary_results_layer_1",
                     "registry": {
-                        "id": "summary_results_1a_registry",
+                        "id": "registration_registry_1",
                         "text": get_registry_name
                     }},
             True: {
                 "is_summary_results_1y": {
                     True: {"layer": "summary_results_layer_2",
                            "registry": {
-                               "id": "summary_results_2a_registry",
+                               "id": "registration_registry_1",
                                "text": get_registry_name
                            }},
                     False: {"layer": "summary_results_layer_3",
                             "registry": {
-                                "id": "summary_results_3a_registry",
+                                "id": "registration_registry_1",
                                 "text": get_registry_name,
                             }}
                 }
@@ -222,13 +236,29 @@ TABLE = {
         "is_prospective": {
             True: {"layer": "registration_layer_1",
                    "registry": {
-                       "id": "registration_1_registry",
+                       "id": "registration_registry_1",
                        "text": get_registry_name
+                   },
+                   "days_reg_to_start": {
+                       "id": "registration_days_1",
+                       "text": get_days_reg_to_start
+                   },
+                   "start_date": {
+                       "id": "registration_start_date_1",
+                       "text": get_start_date
                    }},
             False: {"layer": "registration_layer_2",
                     "registry": {
-                        "id": "registration_2_registry",
+                        "id": "registration_registry_2",
                         "text": get_registry_name
+                    },
+                    "days_reg_to_start": {
+                        "id": "registration_days_2",
+                        "text": get_days_reg_to_start
+                    },
+                    "start_date": {
+                        "id": "registration_start_date_2",
+                        "text": get_start_date
                     }}
         }
     }
@@ -259,16 +289,16 @@ def main():
 
     # Define layer characteristics in each module
     layers = [{'name': 'registration', 'number': 2, 'na': False},
-              {'name': 'summary_results', 'number': 3, 'na': False},
-              {'name': 'publication', 'number': 3, 'na': False},
-              {'name': 'linkage', 'number': 6, 'na': True},
-              {'name': 'open_access', 'number': 4, 'na': True}]
+              {'name': 'summary_results', 'number': 0, 'na': False},
+              {'name': 'publication', 'number': 0, 'na': False},
+              {'name': 'linkage', 'number': 0, 'na': True},
+              {'name': 'open_access', 'number': 0, 'na': True}]
 
     # Build a set of all layers
     all_layers = get_all_layers(layers)
 
     # Read in the data with trial-specific characteristics
-    data = pd.read_csv(args.data)
+    data = pd.read_csv(args.data)[:5]
 
     # Iterate over each trial and select template to be used for each module
     for _, row in data.iterrows():
