@@ -242,7 +242,7 @@ TABLE = {
                     }},
             True: {
                 "is_summary_results_1y": {
-                    True: {"layer": "summary_results_layer_2",
+                    False: {"layer": "summary_results_layer_2",
                            "registry": {
                                "id": "summary_results_registry_2a",
                                "text": get_registry_name
@@ -251,7 +251,7 @@ TABLE = {
                                "id": "summary_results_completion_2b",
                                "text": get_completion_date
                            }},
-                    False: {"layer": "summary_results_layer_3",
+                    True: {"layer": "summary_results_layer_3",
                             "registry": {
                                 "id": "summary_results_registry_3a",
                                 "text": get_registry_name,
@@ -270,7 +270,7 @@ TABLE = {
             False: {"layer": "publication_layer_1"},
             True: {
                 "is_publication_2y": {
-                    True: {"layer": "publication_layer_2",
+                    False: {"layer": "publication_layer_2",
                            "link": {
                                "id": "publication_link_2a",
                                "url": url_for_publication,
@@ -280,7 +280,7 @@ TABLE = {
                                "id": "publication_completion_date_2b",
                                "text": get_completion_date
                            }},
-                    False: {"layer": "publication_layer_3",
+                    True: {"layer": "publication_layer_3",
                             "link": {
                                 "id": "publication_link_3a",
                                 "url": url_for_publication,
