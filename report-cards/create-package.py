@@ -9,7 +9,7 @@ def main():
     parser.add_argument('data', metavar='DATA', type=str,
                         help='The data to use (.csv file)')
     parser.add_argument('--letters_dir', metavar='DIR', type=str,
-                        default=os.getcwd(), dest="letter_dir",
+                        default=os.getcwd(), dest="letters_dir",
                         help='Where to get the invitation letters from (default: current work dir)')
     parser.add_argument('--reports_dir', metavar='DIR', type=str,
                         default=os.getcwd(), dest="reports_dir",
@@ -22,14 +22,24 @@ def main():
 
     os.makedirs(args.outdir, exist_ok=True)
 
-    outpdf = os.path.join(args.outdir, f"{name}-materials.pdf")
+    # Read dataset with email parameters
+    data = pd.read_csv(args.data)
 
-# Convert modified SVG to PDF with inkscape (open source)
-#         subprocess.run([
-#             "/Applications/Inkscape.app/Contents/MacOS/inkscape",
-#             f"--export-filename={outpdf}",
-#             outfile,
-#         ], check=True)
+    # Iterate over each contact and select the correct files to merge
+    for _, row in data.iterrows():
+        name = row['name_for_file']
+        letter_to_merge = os.path.join(args.letters_dir, f"{name}.pdf")
+        merged = os.path.join(args.outdir, f"{name}.pdf")
+        rc = row['ids']
+        rc_split = rc.split(";")
+        trials = []
+        for trial in rc_split:
+            trial = trial.strip()
+            reports_to_merge = os.path.join(args.reports_dir, f"{trial}.pdf")
+            trials.append(reports_to_merge)
+
+        subprocess.run(["pdfunite", letter_to_merge] + trials + ["infosheet.pdf", merged], check=True)
+
 
 if __name__ == "__main__":
     main()
