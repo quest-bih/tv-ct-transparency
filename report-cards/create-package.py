@@ -29,7 +29,7 @@ def main():
     for _, row in data.iterrows():
         name = row['name_for_file']
         letter_to_merge = os.path.join(args.letters_dir, f"{name}.pdf")
-        merged = os.path.join(args.outdir, f"{name}.pdf")
+        merged = os.path.join(args.outdir, f"{name}-materials.pdf")
         rc = row['ids']
         rc_split = rc.split(";")
         trials = []
