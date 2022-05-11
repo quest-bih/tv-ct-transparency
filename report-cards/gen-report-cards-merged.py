@@ -194,7 +194,7 @@ def get_euctr_trn(row):
 
 
 def gen_core_facility_email(row):
-    email = "mailto:delwen.franzen@bih-charite.de"
+    email = "mailto:studienergebnisse@charite.de"
     return email
 
 
