@@ -1,0 +1,63 @@
+id,crossreg_trn,n_crossreg,resolves,matches,non_match_source,non_match_rationale,has_summary_results,start_date,registration_date,completion_date,more_crossreg,comments
+DRKS00003246,2011-004463-69,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+DRKS00004195,DRKS00004172,1,TRUE,FALSE,iv_registration,the trial is dividedin 4 groups with non matching trn and interlinker,FALSE,NA,NA,NA,NA,"publication repott, no link to summary result, confirm if true or not"
+DRKS00004195,DRKS00004196,2,TRUE,FALSE,iv_registration,subproject,FALSE,NA,NA,NA,NA,NA
+DRKS00004195,DRKS00004197,3,TRUE,FALSE,iv_registration,subproject,FALSE,NA,NA,NA,NA,NA
+DRKS00004195,DRKS00004198,4,TRUE,FALSE,iv_registration,longitundinal observation study,FALSE,NA,NA,NA,NA,NA
+DRKS00004858,2013-001599-40,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+DRKS00004871,2011-004393-28,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,look for details in primarz and secondarz outcome
+DRKS00005219,2012-003882-17,1,TRUE,TRUE,NA,QUERY if match or not,NA,NA,NA,NA,NA,"everything matches, however in eu registry mention of nct trn and here corresponding trn is drks"
+NCT00437307,NCT00170677,1,TRUE,FALSE,other,"difference in intervention(time vs combination of med,different phase,NCT00437307 is extension of NCT00170677, pmc aricle has NCT00170677 ref",NA,NA,NA,NA,NA,NA
+NCT00530738,2005-001938-32,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00590447,2005-000743-29,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,ct indentifier in abstract of pmic studz indicates different ct number NCT01458548 and notifies this studz had modified its protocol and registered than as NCT00590447
+NCT00590447,NCT01458548,2,TRUE,FALSE,other,Terminated (This study had an major amendment in 12/2006 introducing risk stratified sequential treatment (RSST). The modified protocol is registered with NCT00590447,NA,NA,NA,NA,NA,NA
+NCT00772655,2006-005778-34,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,"PEI-No.: 364/01
+BFS-No.: 22461/2-2007-001",NA
+NCT00841256,2006-005911-82,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00865982,2008-001849-26,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"mention of trial prematurely ending in 2012 in eur, however status uncler on ctg"
+NCT00942747,2009-011277-33,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,TemPCNSL query
+NCT00942747,NCT01653067,2,TRUE,FALSE,iv_registration,"different iv registration, dofferent intervention and number of participant",NA,NA,NA,NA,STORM-2011,NA
+NCT01181401,2010-019347-18,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"number of particpant planned was 90 in both but onlz ctg notes 94 trial were finallz included,217–220 (2016) article on pubmed has no mention of trn"
+NCT01357681,2010-023941-31,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,skewed outcome
+NCT01440062,2011-002785-20,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"both study mentioned number of deided participant to be 80, ctg mentions 55 enrolled and publication mentions 53, recruitment terminated early"
+NCT01466465,2010-021775-80,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"both study mentioned number of deided participant to be 36, ctg mentions updated 35"
+NCT01471782,2010-024264-18,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,MT103-205,NA
+NCT01471782,NCT02101853,2,TRUE,FALSE,iv_registration,"different trn,sample and phases of trial",NA,NA,NA,NA,NA,NA
+NCT01471782,NCT02393859,3,TRUE,FALSE,iv_registration,"different trn,sample and phases of trial, phase 3 of org trial",NA,NA,NA,NA,NA,NA
+NCT01503372,2010-024379-15,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,ctg 75 vs eur 84
+NCT01525667,2011-003934-16,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01580592,2011-003746-41,1,TRUE,TRUE,other,"no mention of study id however otheraspect of study matches, mention of premature termination",NA,NA,NA,NA,CIGE025EDE14T,NA
+NCT01647880,2011-004787-30,1,TRUE,TRUE,iv_registration,"prematurely ended due to delayed recruitment, other than no menton of same id other trial info matches, the pubmed article mentions both eur no and ctg no linking them",NA,NA,NA,NA,MOVING,NA
+NCT01770080,2011-004777-89,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01801280,2010-021275-92,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,CERL 080A DE 20 T,NA
+NCT01845142,2012-003217-33,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,ViDImmun,NA
+NCT01914965,2009-013698-16,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,Query didnot match any clinical trial
+NCT01928823,2011-001398-19,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,"""221013""","no mention of trn in eur and ctg, however both are similar trial , similar Sponsor's Protocol Code Number"
+NCT01966783,2012-003362-41,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,BUS-2/UCA,NA
+NCT01966783,2016-001921-15,2,TRUE,FALSE,iv_registration,"2 arm trial vs 4 arm trail, subproject of multi centre trial",NA,NA,NA,NA,NA,NA
+NCT02052960,2013-000931-28,1,TRUE,FALSE,iv_registration,different study disease,NA,NA,NA,NA,GEXMab52201 GEXMab25201,NA
+NCT02071615,2012-003882-17,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,DRKS00005219,NA
+NCT02071615,DRKS00005219,2,TRUE,TRUE,NA,NA,FALSE,NA,NA,NA,NA,NA
+NCT02092974,2013-004821-10,1,FALSE,NA,NA,NA,NA,NA,NA,NA,PlacItch,Please check the panned trial particpant eur:100 and ctg 144/ may be non matching
+NCT02094287,2008-008474-31,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02096913,2011-000584-28,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,Query didnot match any clinical trial
+NCT02110043,NCT02110056,1,TRUE,FALSE,iv_registration,"different sponsor protocol number, different trial subject healthy adults vs patient with mci",NA,NA,NA,NA,LOCATO-MCI-tDCS/LOCATO-OA-tDCS,NA
+NCT02110407,2013-004821-10,1,FALSE,NA,NA,NA,NA,NA,NA,NA,LOCATO-YA-tDCS,Query didnot match any clinical trial; publication of study referes to trn NCT02092974
+NCT02169115,2011-005615-87,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,CIGE025EDE17T,NA
+NCT02227641,2012-004240-30,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,AIT-MULTIVIR-01,NA
+NCT02371434,ISRCTN11038572,1,TRUE,FALSE,iv_registration,"ctg registered study has no comparison arm, ukr study has one arm with standard immunosuppressive drugs vs treg13",FALSE,2015-02-18T00:00:00Z,2015-02-18T00:00:00Z,2017-11-01T00:00:00Z,ONEnTreg13,"ONE Study consisted of seven investigator-led, single-arm trials done internationally at eight hospitals in France, Germany, Italy, the UK, and the USA"
+NCT02371434,NCT02085629,2,TRUE,FALSE,iv_registration,One of cell theraphy group of ONE study,NA,NA,NA,NA,2013-000999-15 (ONEmreg12),NA
+NCT02371434,NCT02091232,3,TRUE,FALSE,iv_registration,One of cell theraphy group of ONE study,NA,NA,NA,NA,DAIT RTB-002/R34A1095135/U01AI110658,NA
+NCT02371434,NCT02129881,4,TRUE,FALSE,iv_registration,One of cell theraphy group of ONE study,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02188719,5,TRUE,FALSE,iv_registration,Liver transplant vs kidney transplant,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02244801,6,TRUE,FALSE,iv_registration,One of cell theraphy group of ONE study,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02252055,7,TRUE,FALSE,iv_registration,One of cell theraphy group of ONE study,NA,NA,NA,NA,RC13_0441,NA
+NCT02371434,NCT03577431,8,TRUE,FALSE,iv_registration,liver transplant vs kidney transplant,NA,NA,NA,NA,DAIT ITN073ST,NA
+NCT02566369,2016-002540-13,1,FALSE,NA,NA,NA,NA,NA,NA,NA,RD.06.SPR.18251,Query didnot match any clinical trial
+NCT02566369,2016-002860-15,2,TRUE,TRUE,NA,NA,NA,NA,NA,NA,RD.06.SPR.18251,?trn in published article
+NCT02566369,NCT02556788,3,TRUE,FALSE,iv_registration,"different listed country location, however double check for accuracy",NA,NA,NA,NA,RD.06.SPR.18252,NA
+NCT02664805,2015-002079-11,1,FALSE,NA,NA,NA,NA,NA,NA,NA,LP0133-1180,Query did not match any clinical trials; however mention of eur number in ctg registry
+NCT02720952,2014-002265-30,1,TRUE,TRUE,NA,QUERY if match or not,NA,NA,NA,NA,Infacort003,"both study have similar protocol number, similar inclusion criteria and disease of study, however no mention of trn in both registries; both trn mentioned in published article"
+NCT02720952,NCT01960530,2,TRUE,FALSE,iv_registration,"different population of interest, healthy male volunteers vs children",NA,NA,NA,NA,Infacort 002,NA
+NCT02720952,NCT02777268,3,TRUE,FALSE,iv_registration,healthy subject,NA,NA,NA,NA,Infacort 001,NA
+NCT02755246,NCT03094546,1,TRUE,FALSE,iv_registration,intervention:3 month polyamine supp vs 12 month polyamine,NA,NA,NA,NA,NA,NA

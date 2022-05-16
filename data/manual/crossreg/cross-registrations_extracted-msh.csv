@@ -1,0 +1,62 @@
+id,crossreg_trn,n_crossreg,resolves,matches,non_match_source,non_match_rationale,has_summary_results,start_date,registration_date,completion_date,more_crossreg,comments
+DRKS00003246,2011-004463-69,1,TRUE,TRUE,NA,NA,TRUE,2012-12-11T00:00:00Z,2012-08-03T00:00:00Z,2016-12-02T00:00:00Z,NA,NA
+DRKS00004195,DRKS00004172,1,TRUE,FALSE,iv_registration,Related subprojects,NA,NA,NA,NA,NA,NA
+DRKS00004195,DRKS00004196,2,TRUE,FALSE,iv_registration,Related subprojects,NA,NA,NA,NA,NA,NA
+DRKS00004195,DRKS00004197,3,TRUE,FALSE,iv_registration,Related subprojects,NA,NA,NA,NA,NA,NA
+DRKS00004195,DRKS00004198,4,TRUE,FALSE,iv_registration,Related longitudinal observational study,NA,NA,NA,NA,NA,NA
+DRKS00004858,2013-001599-40,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+DRKS00004871,2011-004393-28,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"leeches are a ""medicinal product"""
+DRKS00005219,2012-003882-17,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00437307,NCT00170677,1,TRUE,FALSE,publication,"NCT00437307 (phase 3) compares Topotecan/Carboplatin vs. standard of care, whereas NCT00170677 (phase 2) compares Topotecan doses",NA,NA,NA,NA,NA,paper says it reports NCT00170677 but reports NCT00437307
+NCT00530738,2005-001938-32,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00590447,2005-000743-29,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00590447,NCT01458548,2,TRUE,FALSE,publication,Preceeding trial,NA,NA,NA,NA,NA,NA
+NCT00772655,2006-005778-34,1,TRUE,TRUE,NA,NA,FALSE,2007-05-09T00:00:00Z,2007-01-05T00:00:00Z,2015-06-30T00:00:00Z,NA,NA
+NCT00841256,2006-005911-82,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"clinicaltrials.gov includes ""Click here for information about this trial in the European Clinical Trials Register"""
+NCT00865982,2008-001849-26,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00942747,2009-011277-33,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT00942747,NCT01653067,2,TRUE,FALSE,publication,"Subsequent study: ""incorporation of temsirolimus into earlier treatment lines or combining it with other cytostatic drugs or rituximab (as is being done for systemic DLBCL in an ongoing study [NCT01653067]""",NA,NA,NA,NA,NA,NA
+NCT01181401,2010-019347-18,1,TRUE,TRUE,NA,NA,TRUE,2010-07-29T00:00:00Z,2010-04-20T00:00:00Z,2015-04-28T00:00:00Z,NA,"is first publication. both refer to same conference presentation about primary outcome, with this citation to the presentation abstract and the other citation to a conference summary in German (including a translated abstract)"
+NCT01357681,2010-023941-31,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01440062,2011-002785-20,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"publication includes a sentence on compliance: ""It was conducted strictly adhering to the study protocol and to applicable national laws (Arzneimittelgesetz, 14. Novelle, 2005), the Harmonized Tripartite Guideline for Good Clinical Practice (ICH GCP), and the principles of the Declaration of Helsinki in its applicable version."""
+NCT01466465,2010-021775-80,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,Vigantol equals Cholecalciferol
+NCT01471782,2010-024264-18,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01471782,NCT02101853,2,TRUE,FALSE,publication,"Subsequent trial: ""These data suggest further investigation of blinatumomab...Such studies are underway (Clinical trial information: NCT02101853, NCT02393859).""",NA,NA,NA,NA,NA,NA
+NCT01471782,NCT02393859,3,TRUE,FALSE,publication,"Subsequent trial: ""These data suggest further investigation of blinatumomab...Such studies are underway (Clinical trial information: NCT02101853, NCT02393859).""",NA,NA,NA,NA,NA,NA
+NCT01503372,2010-024379-15,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,Results publication in 2021-11 https://doi.org/10.1002/ijc.33864
+NCT01525667,2011-003934-16,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01580592,2011-003746-41,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01647880,2011-004787-30,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01770080,2011-004777-89,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01801280,2010-021275-92,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01845142,2012-003217-33,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,results publication also include results for related but separate trial ISRCTN65263333
+NCT01914965,2009-013698-16,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,"transparent methods on registration but euctr doesn't resolve ""The ACTION-HD trial was registered at the EudraCT clinical trial register (EudraCT number 2009-013698-16) on 24th March 2011 prior to inclusion of the first patient. We later registered the trial at clinicaltrials.gov."""
+NCT01928823,2011-001398-19,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,"publication is secondary analysis: ""The present study is a secondary analysis of an already accepted randomized controlled trial investigating the augmenting effect of d-cycloserine (DCS) compared to a placebo on CBT with in-vivo exposures (Pyrkosch et al., 2018)."" Original results publication: https://doi.org/10.1016/j.jpsychires.2018.08.016"
+NCT01966783,2012-003362-41,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT01966783,2016-001921-15,2,TRUE,FALSE,publication,"Subsequent trial: ""A marketing authorization study is ongoing (EudraCT No.: 2016-001921-15).""",NA,NA,NA,NA,NA,NA
+NCT02052960,2013-000931-28,1,TRUE,FALSE,iv_registration,protocol and statistical analysis plan in clinicaltrials.gov registration indicate euctr crossreg under 2013-003695-13; checking both euctr shows that 2013-003695-13 is a true match and 2013-000931-28 was probably included as a typo in clinicaltrials.gov,NA,NA,NA,NA,NA,NA
+NCT02071615,2012-003882-17,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02071615,DRKS00005219,2,TRUE,TRUE,NA,NA,FALSE,NA,NA,NA,NA,NA
+NCT02092974,2013-004821-10,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02094287,2008-008474-31,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,ISRCTN12345678 mentioned in euctr but made-up trn
+NCT02096913,2011-000584-28,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02110043,NCT02110056,1,TRUE,FALSE,publication,"Preceeding trial: ""Data reported here were assessed during a randomized interventional trial comprising elderly subjects with MCI (registered at https://clinicaltrials.gov: NCT02110043, https://clinicaltrials.gov/show/NCT02110043). Data were compared with previously reported data of HE (NCT02110056, https://clinicaltrials.gov/show/NCT02110056 [21]), who underwent the identical study protocol.""",NA,NA,NA,NA,NA,NA
+NCT02110407,2013-004821-10,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02169115,2011-005615-87,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02227641,2012-004240-30,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02371434,ISRCTN11038572,1,TRUE,FALSE,publication,"Subsequent trial: ""Based on The ONE Study, the UK group has already initiated a randomised trial called the TWO Study with their polyclonal Treg cell product (ISRCTN11038572)""",NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02085629,2,TRUE,FALSE,publication,Sub-trial,NA,NA,NA,NA,"NCT01656135, NCT02371434",Additional sub-trials; unclear why not auto detected.
+NCT02371434,NCT02091232,3,TRUE,FALSE,publication,Sub-trial,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02129881,4,TRUE,FALSE,publication,Sub-trial,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02188719,5,TRUE,FALSE,publication,"Subsequent trial: ""Based on The ONE Study...other ONE Study partners (Massachusetts General Hospital: NCT03577431 and UCSF Medical Center: NCT02188719) are doing trials""",NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02244801,6,TRUE,FALSE,publication,Sub-trial,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT02252055,7,TRUE,FALSE,publication,Sub-trial,NA,NA,NA,NA,NA,NA
+NCT02371434,NCT03577431,8,TRUE,FALSE,publication,"Subsequent trial: ""Based on The ONE Study...other ONE Study partners (Massachusetts General Hospital: NCT03577431 and UCSF Medical Center: NCT02188719) are doing trials""",NA,NA,NA,NA,NA,NA
+NCT02566369,2016-002540-13,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02566369,2016-002860-15,2,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02566369,NCT02556788,3,TRUE,FALSE,publication,"related trial: ""The primary efficacy results from 2 large-scale phase III studies (PERFECT 1 and PERFECT 2 ClinicalTrials.gov registration number NCT02566369 and NCT02556788, respectively, and European Clinical Trials Database numbers 2016-002860-15 and 2016-002540-13, respectively]) are reported here.""",NA,NA,NA,NA,NA,NA
+NCT02664805,2015-002079-11,1,FALSE,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02720952,2014-002265-30,1,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+NCT02720952,NCT01960530,2,TRUE,FALSE,publication,"Preceeding trial: ""Pharmacokinetic (PK) data from two Phase 1 studies (ClinicalTrials.gov Reference No. NCT02777268 & NCT01960530) of Infacort in healthy adult volunteers""",NA,NA,NA,NA,NA,NA
+NCT02720952,NCT02777268,3,TRUE,FALSE,publication,"Preceeding trial: ""Pharmacokinetic (PK) data from two Phase 1 studies (ClinicalTrials.gov Reference No. NCT02777268 & NCT01960530) of Infacort in healthy adult volunteers""",NA,NA,NA,NA,NA,NA
+NCT02755246,NCT03094546,1,TRUE,FALSE,publication,"Subsequent trial: ""Outcomes of this study serve as a rationale to conduct a Phase IIb randomized controlled trial (ClinicalTrials.gov identifier: NCT03094546)""",NA,NA,NA,NA,NA,NA
