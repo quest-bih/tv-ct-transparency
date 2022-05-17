@@ -514,76 +514,21 @@ def main():
                 element = value
                 value = value[key]
 
-            layer = element["layer"]
-            included_layers.add(layer)
-            link = element.get("link")
-            if link:
-                url = link["url"](row)
-                the_id = link["id"]
-                text = link["text"](row)
-                replace(root, "g", the_id, text, url)
-            registry = element.get("registry")
-            if registry:
-                the_id = registry["id"]
-                text = registry["text"](row)
-                replace(root, "g", the_id, text)
-            improve_registry = element.get("improve_registry")
-            if improve_registry:
-                the_id = improve_registry["id"]
-                text = improve_registry["text"](row)
-                replace(root, "g", the_id, text)
-            days_reg_to_start = element.get("days_reg_to_start")
-            if days_reg_to_start:
-                the_id = days_reg_to_start["id"]
-                text = days_reg_to_start["text"](row)
-                replace(root, "g", the_id, text)
-            start_date = element.get("start_date")
-            if start_date:
-                the_id = start_date["id"]
-                text = start_date["text"](row)
-                replace(root, "g", the_id, text)
-            completion_date = element.get("completion_date")
-            if completion_date:
-                the_id = completion_date["id"]
-                text = completion_date["text"](row)
-                replace(root, "g", the_id, text)
-            improve_sumres_link = element.get("improve_sumres_link")
-            if improve_sumres_link:
-                the_id = improve_sumres_link["id"]
-                url = improve_sumres_link["url"](row)
-                replace(root, "g", the_id, None, url)
-            improve_linkage_link = element.get("improve_linkage_link")
-            if improve_linkage_link:
-                the_id = improve_linkage_link["id"]
-                url = improve_linkage_link["url"](row)
-                replace(root, "g", the_id, None, url)
-            link_syp = element.get("link_syp")
-            if link_syp:
-                the_id = link_syp["id"]
-                url = link_syp["url"]
-                replace(root, "g", the_id, None, url)
-            link_library = element.get("link_library")
-            if link_library:
-                the_id = link_library["id"]
-                url = link_library["url"](row)
-                replace(root, "g", the_id, None, url)
-            euctr_trn = element.get("euctr_trn")
-            if euctr_trn:
-                the_id = euctr_trn["id"]
-                text = euctr_trn["text"](row)
-                url = euctr_trn["url"](row)
-                replace(root, "g", the_id, text, url)
-            improve_euctr_crossreg_link = element.get("improve_euctr_crossreg_link")
-            if improve_euctr_crossreg_link:
-                the_id = improve_euctr_crossreg_link["id"]
-                url = improve_euctr_crossreg_link["email"](row)
-                replace(root, "g", the_id, None, url)
-            trn = element.get("trn")
-            if trn:
-                the_id = trn["id"]
-                text = trn["text"](row)
-                replace(root, "g", the_id, text)
+            for k, v in element.items():
+                if k == "layer":
+                    included_layers.add(v)
+                    continue
 
+                the_id = v["id"]
+                text = v.get("text")
+                url = v.get("url") or v.get("email")
+
+                if text and callable(text):
+                    text = text(row)
+                if url and callable(url):
+                    url = url(row)
+
+                replace(root, "g", the_id, text, url)
 
         # Define which layers need to be excluded for this trial
         layers_to_exclude = all_layers - included_layers
