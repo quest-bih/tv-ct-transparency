@@ -193,6 +193,10 @@ def get_euctr_trn(row):
     return row["id"]
 
 
+def get_trn(row):
+    return "'" + row["id"] + "'"
+
+
 def gen_core_facility_email(row):
     email = "mailto:studienergebnisse@charite.de"
     return email
@@ -294,23 +298,39 @@ TABLE = {
             }
         }
     },
-    "#linkage_full_text": {
-        "has_publication": {
-            False: {"layer": "linkage_layer_na"},
-            True: {
-                "has_iv_trn_ft": {
-                    True: {"layer": "linkage_layer_1"},
-                    False: {"layer": "linkage_layer_2"}}
-            }
-        }
-    },
     "#linkage_abstract": {
         "has_publication": {
             False: {"layer": "linkage_layer_na"},
             True: {
                 "has_iv_trn_abstract": {
-                    True: {"layer": "linkage_layer_3"},
-                    False: {"layer": "linkage_layer_4"}
+                    True: {"layer": "linkage_layer_1",
+                           "trn": {
+                               "id": "linkage_trn_1a",
+                               "text": get_trn
+                           }},
+                    False: {"layer": "linkage_layer_2",
+                            "trn": {
+                                "id": "linkage_trn_2a",
+                                "text": get_trn
+                            }}}
+            }
+        }
+    },
+    "#linkage_full_text": {
+        "has_publication": {
+            False: {"layer": "linkage_layer_na"},
+            True: {
+                "has_iv_trn_ft": {
+                    True: {"layer": "linkage_layer_3",
+                           "trn": {
+                               "id": "linkage_trn_3b",
+                               "text": get_trn
+                           }},
+                    False: {"layer": "linkage_layer_4",
+                            "trn": {
+                                "id": "linkage_trn_4b",
+                                "text": get_trn
+                            }}
                 }
             }
         }
@@ -532,6 +552,11 @@ def main():
                 the_id = improve_euctr_crossreg_link["id"]
                 url = improve_euctr_crossreg_link["email"](row)
                 replace(root, "g", the_id, None, url)
+            trn = element.get("trn")
+            if trn:
+                the_id = trn["id"]
+                text = trn["text"](row)
+                replace(root, "g", the_id, text)
 
 
         # Define which layers need to be excluded for this trial
