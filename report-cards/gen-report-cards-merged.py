@@ -455,6 +455,8 @@ def main():
                         help='Where to store the output (default: current work dir)')
     parser.add_argument('--filter', metavar='FILTER', type=str,
                         help='Filter trials by TRN')
+    parser.add_argument('--no-pdf', action="store_true", default=False,
+                        help='Do not produce the pdf')
 
     args = parser.parse_args()
 
@@ -541,6 +543,10 @@ def main():
 
         with open(outfile, "wb") as f:
             f.write(out)
+
+        # optionally skip the pdf if requested
+        if args.no_pdf:
+            continue
 
         outpdf = os.path.join(args.outdir, f"{name}.pdf")
 
