@@ -387,31 +387,57 @@ TABLE = {
     "#euctr_crossreg": {
         "has_crossreg_eudract": {
             True: {
-                # TODO: change to has results posted in EUCTR
-                # TODO: potentially add link to EUCTR cross-registration
-                "has_summary_results": {
-                    False: {
-                        "layer": "euctr_crossreg_layer_1",
-                        "euctr_trn": {
-                            "id": "euctr_crossreg_trn_1",
-                            "text": get_euctr_trn,
-                            "url": url_for_euctr_crossreg
-                        },
-                        "improve_euctr_crossreg_link": {
-                            "id": "euctr_crossreg_improve_link_1",
-                            "email": gen_core_facility_email
-                        }},
+                # TODO: change to is_prospective in EudraCT
+                "is_prospective": {
                     True: {
-                        "layer": "euctr_crossreg_layer_2",
-                        "euctr_trn": {
-                            "id": "euctr_crossreg_trn_2",
-                            "text": get_euctr_trn,
-                            "url": url_for_euctr_crossreg
-                        }},
+                        # TODO: change to has results posted in EudraCT
+                        "has_summary_results": {
+                            True: {
+                                "layer": "euctr_crossreg_layer_1",
+                                "euctr_trn": {
+                                    "id": "euctr_crossreg_trn_1",
+                                    "text": get_euctr_trn,
+                                    "url": url_for_euctr_crossreg
+                                }},
+                            False: {
+                                "layer": "euctr_crossreg_layer_2",
+                                "euctr_trn": {
+                                    "id": "euctr_crossreg_trn_2",
+                                    "text": get_euctr_trn,
+                                    "url": url_for_euctr_crossreg
+                                },
+                                "improve_euctr_crossreg_link": {
+                                    "id": "euctr_crossreg_improve_link_2",
+                                    "email": gen_core_facility_email
+                                }},
+                        }
+                    },
+                    False: {
+                        "has_summary_results": {
+                            True: {
+                                "layer": "euctr_crossreg_layer_3",
+                                "euctr_trn": {
+                                    "id": "euctr_crossreg_trn_3",
+                                    "text": get_euctr_trn,
+                                    "url": url_for_euctr_crossreg
+                                }},
+                            False: {
+                                "layer": "euctr_crossreg_layer_4",
+                                "euctr_trn": {
+                                    "id": "euctr_crossreg_trn_4",
+                                    "text": get_euctr_trn,
+                                    "url": url_for_euctr_crossreg
+                                },
+                                "improve_euctr_crossreg_link": {
+                                    "id": "euctr_crossreg_improve_link_4",
+                                    "email": gen_core_facility_email
+                                }},
+                        }
+                    }
                 }
             },
             False: {
-                "layer": "euctr_crossreg_layer_3"
+                "layer": "euctr_crossreg_layer_na"
             }
         }
     }
@@ -448,7 +474,7 @@ def main():
               {'name': 'publication', 'number': 3, 'na': False},
               {'name': 'linkage', 'number': 6, 'na': True},
               {'name': 'open_access', 'number': 4, 'na': True},
-              {'name': 'euctr_crossreg', 'number': 2, 'na': True}]
+              {'name': 'euctr_crossreg', 'number': 4, 'na': True}]
 
     # Build a set of all layers
     all_layers = get_all_layers(layers)
