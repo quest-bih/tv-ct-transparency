@@ -25,18 +25,27 @@ def linkify(node, target):
     link.insert(0, node)
 
 
-# Function to replace text
-def replace(root, section_type, id_name, text=None, target=None):
+def get_element(root, id_name, section_type="g"):
     results = root.xpath(f"//svg:{section_type}[@id = '{id_name}']", namespaces={"svg": "http://www.w3.org/2000/svg"})
+
     if not results:
-        print(f"WARNING: {id_name} field does not exist")
-        return
-        #raise Exception(f"{id_name} field does not exist")
+        return None
 
     if section_type == "g":
         node = results[0].getchildren()[0]
     else:
         node = results[0]
+
+    return node
+
+
+# Function to replace text
+def replace(root, section_type, id_name, text=None, target=None):
+    node = get_element(root, id_name, section_type)
+    if node is None:
+        print(f"WARNING: {id_name} field does not exist")
+        return
+        #raise Exception(f"{id_name} field does not exist")
 
     if text is not None:
         node.text = str(text)
@@ -202,6 +211,19 @@ def gen_core_facility_email(row):
     return email
 
 
+def spacify(name, num=3):
+    def fn(root, row):
+        if row["registry"] != "DRKS":
+            return
+
+        node = get_element(root, name)
+        if node is None:
+            print(f"WARNING {name} not found")
+            return
+        node.text = " "*num + node.text
+    return fn
+
+
 TABLE = {
     "#open_access": {
         "has_publication": {
@@ -305,13 +327,15 @@ TABLE = {
                 "has_iv_trn_abstract": {
                     True: {"layer": "linkage_layer_1",
                            "trn": {
-                               "id": "linkage_trn_1a",
-                               "text": get_trn
+                               "id": "linkage_trn_1b",
+                               "text": get_trn,
+                               "post": spacify("linkage_text_1b")
                            }},
                     False: {"layer": "linkage_layer_2",
                             "trn": {
-                                "id": "linkage_trn_2a",
-                                "text": get_trn
+                                "id": "linkage_trn_2b",
+                                "text": get_trn,
+                                "post": spacify("linkage_text_2b")
                             }}}
             }
         }
@@ -323,13 +347,15 @@ TABLE = {
                 "has_iv_trn_ft": {
                     True: {"layer": "linkage_layer_3",
                            "trn": {
-                               "id": "linkage_trn_3b",
-                               "text": get_trn
+                               "id": "linkage_trn_3c",
+                               "text": get_trn,
+                               "post": spacify("linkage_text_3c")
                            }},
                     False: {"layer": "linkage_layer_4",
                             "trn": {
-                                "id": "linkage_trn_4b",
-                                "text": get_trn
+                                "id": "linkage_trn_4c",
+                                "text": get_trn,
+                                "post": spacify("linkage_text_4c")
                             }}
                 }
             }
@@ -531,6 +557,10 @@ def main():
                     url = url(row)
 
                 replace(root, "g", the_id, text, url)
+
+                post = v.get("post")
+                if post:
+                    post(root, row)
 
         # Define which layers need to be excluded for this trial
         layers_to_exclude = all_layers - included_layers
