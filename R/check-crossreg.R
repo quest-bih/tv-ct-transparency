@@ -6,6 +6,8 @@ library(fs)
 library(glue)
 library(googlesheets4)
 library(daff)
+# devtools::install_github("bgcarlisle/euctrscrape")
+library(euctrscrape)
 
 trackvalue <-  read_csv(here("data", "processed", "trackvalue.csv"))
 crossreg <-  read_csv(here("data", "processed", "crossreg.csv"))
@@ -300,10 +302,93 @@ render_diff(patch)
 
 
 # Download reconciled, final extractions ----------------------------------
-reconciled_raw <- read_sheet(spreadsheet, "Reconciled", na = c("NA", "NULL", ""))
+reconciled_crossreg_path <- path(crossreg_dir, "cross-registrations_reconciled.csv")
 
-reconciled <-
-  reconciled_raw %>%
-  select(id, crossreg_trn, n_crossreg, resolves, matches, non_match_source, non_match_rationale, has_summary_results, start_date, registration_date, completion_date, more_crossreg, comments)
+if(!fs::file_exists(reconciled_crossreg_path)){
+  reconciled_raw <- read_sheet(spreadsheet, "Reconciled", na = c("NA", "NULL", ""))
 
-write_csv(reconciled, path(crossreg_dir, "cross-registrations_reconciled.csv"))
+  reconciled <-
+    reconciled_raw %>%
+    select(id, crossreg_trn, n_crossreg, resolves, matches, non_match_source, non_match_rationale, has_summary_results, start_date, registration_date, completion_date, more_crossreg, comments)
+
+  write_csv(reconciled, path(crossreg_dir, "cross-registrations_reconciled.csv"))
+
+} else reconciled <- read_csv(reconciled_crossreg_path)
+
+
+# Update crossreg to valid crossreg ---------------------------------------
+
+# Limit to valid cross-reg
+crossreg_valid <-
+  crossreg %>%
+
+  # Add in manual info (resolves and matches)
+  left_join(
+    select(reconciled, id, crossreg_trn, resolves, matches),
+    by = c("id", "crossreg_trn")
+  ) %>%
+
+  # Limit to valid cross-reg
+  filter(resolves & matches)
+
+
+# Get eudract registry data -----------------------------------------------
+
+euctr_trns <-
+  crossreg_valid %>%
+  filter(crossreg_registry == "EudraCT") %>%
+  distinct(crossreg_trn) %>%
+  rename(trn = crossreg_trn)
+
+euctr_data_path <- here::here("data", "processed", "crossreg-euctr-data.csv")
+
+# Since this webscraping is slow, run only if missing eudract trns
+if (!fs::file_exists(euctr_data_path)){
+  euctr_scrape = TRUE
+} else {
+  euctr_data <- readr::read_csv(euctr_data_path)
+  if(!all(euctr_trns$trn %in% euctr_data$trn)){
+    euctr_scrape = TRUE
+  } else euctr_scrape = FALSE
+}
+if (euctr_scrape) {
+  message("Scraping EUCTR...")
+
+  euctr_data_raw <-
+    euctr_trns %>%
+    rowwise() %>%
+
+    # Get trial start and end date, results status and date
+    mutate(as_tibble(euctr_details(trn))) %>%
+
+    # Get trial registration date
+    mutate(registration_date = euctr_reg_dates(trn)[1]) %>%
+
+    ungroup()
+
+  euctr_data <-
+    euctr_data_raw %>%
+    mutate(across(ends_with("date"), lubridate::as_date)) %>%
+    mutate(
+      has_valid_crossreg = TRUE,
+
+      # Registration is prospective if registered in same or prior month to start
+      is_prospective =
+        (lubridate::floor_date(registration_date, unit = "month") <=
+           lubridate::floor_date(start_date, unit = "month"))
+
+    ) %>%
+    select(
+      trn,
+      has_valid_crossreg,
+      registration_date,
+      start_date,
+      is_prospective,
+      has_summary_results = trial_results,
+      summary_results_date = pub_date,
+      completion_date = global_completion_date
+    ) %>%
+    rename_with(~ paste0(., "_eudract"), -trn)
+
+  readr::write_csv(euctr_data, euctr_data_path)
+}
