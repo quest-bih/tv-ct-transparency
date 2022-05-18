@@ -44,7 +44,10 @@ trackvalue <-
   ), by = "id") %>%
 
   # Trials with a journal article have a publication (disregard dissertations and abstracts)
-  mutate(has_publication = if_else(publication_type == "journal publication", TRUE, FALSE, missing = FALSE))
+  mutate(has_publication = if_else(publication_type == "journal publication", TRUE, FALSE, missing = FALSE)) %>%
+
+  # Add variable to record if days_reg_to_start is positive or negative
+  mutate(days_reg_to_start_is_positive = if_else(days_reg_to_start > 0, TRUE, FALSE))
 
 # Check assumptions
 # We expect all trials with summary results to have T/F for summary results timeliness
