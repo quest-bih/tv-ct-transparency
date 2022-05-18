@@ -382,32 +382,41 @@ TABLE = {
     },
     "#registration": {
         "is_prospective": {
-            True: {"layer": "registration_layer_1",
-                   "registry": {
-                       "id": "registration_registry_1",
-                       "text": get_registry_name
-                   },
-                   "days_reg_to_start": {
-                       "id": "registration_days_1",
-                       "text": get_days_reg_to_start
-                   },
-                   "start_date": {
-                       "id": "registration_start_date_1",
-                       "text": get_start_date
-                   }},
-            False: {"layer": "registration_layer_2",
+            True: {
+                "days_reg_to_start_is_positive": {
+                    True: {"layer": "registration_layer_1",
+                           "registry": {
+                               "id": "registration_registry_1",
+                               "text": get_registry_name
+                           },
+                           "start_date": {
+                               "id": "registration_start_date_1",
+                               "text": get_start_date
+                           }},
+                    False: {"layer": "registration_layer_2",
+                            "registry": {
+                                "id": "registration_registry_2",
+                                "text": get_registry_name
+                            },
+                            "start_date": {
+                                "id": "registration_start_date_2",
+                                "text": get_start_date
+                            }}
+                }
+            },
+            False: {"layer": "registration_layer_3",
                     "registry": {
-                        "id": "registration_registry_2",
+                        "id": "registration_registry_3",
                         "text": get_registry_name
                     },
                     "days_reg_to_start": {
-                        "id": "registration_days_2",
+                        "id": "registration_days_3",
                         "text": get_days_reg_to_start
                     },
                     "start_date": {
-                        "id": "registration_start_date_2",
+                        "id": "registration_start_date_3",
                         "text": get_start_date
-                    }}
+                    }},
         }
     },
     "#euctr_crossreg": {
@@ -497,7 +506,7 @@ def main():
     template = etree.fromstring(data)
 
     # Define layer characteristics in each module
-    layers = [{'name': 'registration', 'number': 2, 'na': False},
+    layers = [{'name': 'registration', 'number': 3, 'na': False},
               {'name': 'summary_results', 'number': 3, 'na': False},
               {'name': 'publication', 'number': 3, 'na': False},
               {'name': 'linkage', 'number': 6, 'na': True},
