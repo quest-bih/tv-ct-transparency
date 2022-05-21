@@ -10,9 +10,32 @@ library(daff)
 library(euctrscrape)
 
 trackvalue <-  read_csv(here("data", "processed", "trackvalue.csv"))
-crossreg <-  read_csv(here("data", "processed", "crossreg.csv"))
+intovalue_crossreg <- read_csv(here::here("data", "raw", "intovalue-crossreg.csv"))
 
 crossreg_dir <- dir_create(here("data", "manual", "crossreg"))
+
+
+# Limit to trackvalue cross-registrations ---------------------------------
+
+crossreg <-
+  intovalue_crossreg %>%
+  semi_join(trackvalue, by = c("id", "pmid", "doi")) %>%
+  distinct() %>%
+
+  # Update crossreg for trial with ft not currently parsed in intovalue-data
+  # Checked for crossreg in ft -> 2013-002319-82 TODO: add to crossreg
+  # TODO: update in intovalue-data with bcg and grobid
+  add_row(
+    id = "NCT01984788",
+    pmid = 27302552,
+    doi = "10.1016/j.jaci.2016.03.043",
+    crossreg_trn = "2013-002319-82",
+    crossreg_registry = "EudraCT",
+    is_crossreg_secondary_id = FALSE,
+    is_crossreg_abstract = FALSE,
+    is_crossreg_ft = TRUE,
+    is_crossreg_reg = FALSE,
+  )
 
 # Explore potential cross-registrations -----------------------------------
 
@@ -316,7 +339,10 @@ if(!fs::file_exists(reconciled_crossreg_path)){
 } else reconciled <- read_csv(reconciled_crossreg_path)
 
 
-# Update crossreg to valid crossreg ---------------------------------------
+# Update crossreg with manual validation ----------------------------------
+
+# Update crossreg with manual validation and write csv --------------------
+
 
 # Limit to valid cross-reg
 crossreg_valid <-
@@ -326,16 +352,18 @@ crossreg_valid <-
   left_join(
     select(reconciled, id, crossreg_trn, resolves, matches),
     by = c("id", "crossreg_trn")
-  ) %>%
+  )
 
-  # Limit to valid cross-reg
-  filter(resolves & matches)
-
+readr::write_csv(crossreg_valid, here::here("data", "processed", "crossreg.csv"))
 
 # Get eudract registry data -----------------------------------------------
 
 euctr_trns <-
   crossreg_valid %>%
+
+  # Limit to valid cross-reg
+  filter(resolves & matches) %>%
+
   filter(crossreg_registry == "EudraCT") %>%
   distinct(crossreg_trn) %>%
   rename(trn = crossreg_trn)
@@ -391,4 +419,4 @@ if (euctr_scrape) {
     rename_with(~ paste0(., "_eudract"), -trn)
 
   readr::write_csv(euctr_data, euctr_data_path)
-}
+} else (euctr_data <- readr::read_csv(euctr_data_path))

@@ -4,7 +4,7 @@ library(readr)
 library(assertr)
 
 intovalue <- read_csv(here::here("data", "raw", "intovalue.csv"))
-intovalue_crossreg <- read_csv(here::here("data", "raw", "intovalue-crossreg.csv"))
+# intovalue_crossreg <- read_csv(here::here("data", "raw", "intovalue-crossreg.csv"))
 
 dir <- fs::dir_create(here::here("data", "processed"))
 
@@ -111,14 +111,3 @@ missing_syp <-
   select(id, pmid, doi, url, color, is_closed_archivable)
 
 readr::write_csv(trackvalue, fs::path(dir, "trackvalue.csv"))
-
-
-# CROSS-REGISTRATIONS -----------------------------------------------------
-
-# Limit to cross-registrations of trials included in trackvalue
-trackvalue_crossreg <-
-  intovalue_crossreg %>%
-  semi_join(trackvalue, by = c("id", "pmid", "doi")) %>%
-  distinct()
-
-readr::write_csv(trackvalue_crossreg, fs::path(dir, "crossreg.csv"))
