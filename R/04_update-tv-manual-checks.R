@@ -14,7 +14,7 @@ trackvalue_checked <-
   select(-starts_with("has_crossreg"), -starts_with("n_crossreg")) %>%
 
   # Add in euctr crossreg data
-  left_join(euctr_crossreg, by = c("id" = "trn"))
+  left_join(euctr_crossreg, by = "id")
 
 # TODO: delwen add oa
 
