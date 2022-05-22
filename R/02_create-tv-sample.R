@@ -34,8 +34,8 @@ trackvalue <-
   # If different publications for IV 1 & 2, manually remove a version
   # https://docs.google.com/spreadsheets/d/1RufE5pZL5PlBWx4SOryGbZ_DZxv2d5xuBQ6vcE4EDWk/edit#gid=288586668
   filter(
-    !(id == "NCT00850629" & iv_version == 1),
-    !(id == "NCT01049100" & iv_version == 1),
+    !(id == "NCT00850629" & iv_version == 2), # IV1 may not be primary outcome, but IV2 is protocol
+    !(id == "NCT01049100" & iv_version == 1), # IV2 only secondary outcomes
     !(id == "NCT01105143" & iv_version == 1),
     !(id == "NCT01181401" & iv_version == 1),
     !(id == "NCT01605487" & iv_version == 2)
