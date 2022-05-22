@@ -365,7 +365,7 @@ euctr_trns <-
   filter(resolves & matches) %>%
 
   filter(crossreg_registry == "EudraCT") %>%
-  distinct(crossreg_trn) %>%
+  distinct(id, crossreg_trn) %>%
   rename(trn = crossreg_trn)
 
 euctr_data_path <- here::here("data", "processed", "crossreg-euctr-data.csv")
@@ -416,7 +416,7 @@ if (euctr_scrape) {
       summary_results_date = pub_date,
       completion_date = global_completion_date
     ) %>%
-    rename_with(~ paste0(., "_eudract"), -trn)
+    rename_with(~ paste0(., "_eudract"), -id)
 
   readr::write_csv(euctr_data, euctr_data_path)
 } else (euctr_data <- readr::read_csv(euctr_data_path))
