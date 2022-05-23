@@ -153,16 +153,17 @@ def id_for_publication(row):
 
 
 def get_publication_title(row):
-    pub_title = (row['pub_title'])
-    if not isinstance(pub_title, str):
-        if np.isnan(pub_title):
-            pub_title = "DOI: " + row['doi']
+    citation = (row['citation'])
+    if not isinstance(citation, str):
+        if np.isnan(citation):
+            citation = "DOI: " + row['doi']
     else:
-        pub_title = pub_title.title()
-    cutoff = 45
-    if len(pub_title) > cutoff:
-        pub_title = pub_title[0:cutoff] + "…"
-    return pub_title
+        citation = citation
+        # citation = citation.title()
+    cutoff = 50
+    if len(citation) > cutoff:
+        citation = citation[0:cutoff] + "…"
+    return citation
 
 
 def get_registry_name(row):
