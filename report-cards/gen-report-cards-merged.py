@@ -139,8 +139,7 @@ def url_for_library(row):
 
 
 def url_for_euctr_crossreg(row):
-    # TODO: change to EUCTR TRN!
-    url = "https://www.clinicaltrialsregister.eu/ctr-search/search?query=" + row['id']
+    url = "https://www.clinicaltrialsregister.eu/ctr-search/search?query=" + row['trn_eudract']
 
     if not isinstance(url, str):
         if np.isnan(url):
@@ -199,8 +198,7 @@ def get_completion_date(row):
 
 
 def get_euctr_trn(row):
-    #TODO: change to EUCTR TRN!
-    return row["id"]
+    return row["trn_eudract"]
 
 
 def get_trn(row):
@@ -421,13 +419,12 @@ TABLE = {
         }
     },
     "#euctr_crossreg": {
-        "has_crossreg_eudract": {
+        "has_valid_crossreg_eudract": {
+            False: {"layer": "euctr_crossreg_layer_na"},
             True: {
-                # TODO: change to is_prospective in EudraCT
-                "is_prospective": {
+                "is_prospective_eudract": {
                     True: {
-                        # TODO: change to has results posted in EudraCT
-                        "has_summary_results": {
+                        "has_summary_results_eudract": {
                             True: {
                                 "layer": "euctr_crossreg_layer_1",
                                 "euctr_trn": {
@@ -449,7 +446,7 @@ TABLE = {
                         }
                     },
                     False: {
-                        "has_summary_results": {
+                        "has_summary_results_eudract": {
                             True: {
                                 "layer": "euctr_crossreg_layer_3",
                                 "euctr_trn": {
@@ -471,9 +468,6 @@ TABLE = {
                         }
                     }
                 }
-            },
-            False: {
-                "layer": "euctr_crossreg_layer_na"
             }
         }
     }
