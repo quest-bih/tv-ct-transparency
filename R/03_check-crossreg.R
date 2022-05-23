@@ -1,3 +1,5 @@
+# We manually checked cross-registrations. See protocol: https://osf.io/mjpzh/
+
 library(dplyr)
 library(stringr)
 library(here)
