@@ -4,7 +4,7 @@ library(readr)
 library(assertr)
 
 intovalue <- read_csv(here::here("data", "raw", "intovalue.csv"))
-intovalue_crossreg <- read_csv(here::here("data", "raw", "intovalue-crossreg.csv"))
+# intovalue_crossreg <- read_csv(here::here("data", "raw", "intovalue-crossreg.csv"))
 
 dir <- fs::dir_create(here::here("data", "processed"))
 
@@ -34,8 +34,8 @@ trackvalue <-
   # If different publications for IV 1 & 2, manually remove a version
   # https://docs.google.com/spreadsheets/d/1RufE5pZL5PlBWx4SOryGbZ_DZxv2d5xuBQ6vcE4EDWk/edit#gid=288586668
   filter(
-    !(id == "NCT00850629" & iv_version == 1),
-    !(id == "NCT01049100" & iv_version == 1),
+    !(id == "NCT00850629" & iv_version == 2), # IV1 may not be primary outcome, but IV2 is protocol
+    !(id == "NCT01049100" & iv_version == 1), # IV2 only secondary outcomes
     !(id == "NCT01105143" & iv_version == 1),
     !(id == "NCT01181401" & iv_version == 1),
     !(id == "NCT01605487" & iv_version == 2)
@@ -111,14 +111,3 @@ missing_syp <-
   select(id, pmid, doi, url, color, is_closed_archivable)
 
 readr::write_csv(trackvalue, fs::path(dir, "trackvalue.csv"))
-
-
-# CROSS-REGISTRATIONS -----------------------------------------------------
-
-# Limit to cross-registrations of trials included in trackvalue
-trackvalue_crossreg <-
-  intovalue_crossreg %>%
-  semi_join(trackvalue, by = c("id", "pmid", "doi")) %>%
-  distinct()
-
-readr::write_csv(trackvalue_crossreg, fs::path(dir, "crossreg.csv"))
