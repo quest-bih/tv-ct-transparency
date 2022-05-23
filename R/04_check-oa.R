@@ -14,6 +14,7 @@ oa_checks <- tribble(
   "10.1097/eja.0000000000000929", "open-unclear", "open-unclear", TRUE, NA,
   "10.1016/j.jaci.2012.06.047", "open-unclear", "open-unclear", TRUE, NA,
   "10.1200/jco.2011.41.1553","open-unclear", "open-unclear", TRUE, NA,
+  "10.1016/s1470-2045(18)30372-3", "open-unclear", "open-unclear", TRUE, NA,
 
   # accessible version of publication found in Refubium
   "10.1017/s0033291716001379", "green", "green", TRUE, NA
