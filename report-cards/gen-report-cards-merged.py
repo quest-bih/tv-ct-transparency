@@ -4,7 +4,7 @@ import copy
 import fnmatch
 import os
 import subprocess
-import sys
+
 from lxml import etree
 import pandas as pd
 import numpy as np
@@ -45,7 +45,6 @@ def replace(root, section_type, id_name, text=None, target=None):
     if node is None:
         print(f"WARNING: {id_name} field does not exist")
         return
-        #raise Exception(f"{id_name} field does not exist")
 
     if text is not None:
         node.text = str(text)
@@ -133,7 +132,7 @@ def url_for_improve_link(row):
     return url
 
 
-def url_for_library(row):
+def url_for_library(_row):
     url = "https://bibliothek.charite.de/en/publishing/open_access/the_green_route_to_open_access/"
     return url
 
@@ -152,13 +151,10 @@ def id_for_publication(row):
 
 
 def get_publication_title(row):
-    citation = (row['citation'])
+    citation = row['citation']
     if not isinstance(citation, str):
         if np.isnan(citation):
             citation = "DOI: " + row['doi']
-    else:
-        citation = citation
-        # citation = citation.title()
     cutoff = 50
     if len(citation) > cutoff:
         citation = citation[0:cutoff] + "…"
@@ -205,7 +201,7 @@ def get_trn(row):
     return "'" + row["id"] + "'"
 
 
-def gen_core_facility_email(row):
+def gen_core_facility_email(_row):
     email = "mailto:studienergebnisse@charite.de"
     return email
 
@@ -539,6 +535,7 @@ def main():
                 key = next(iter(value))  # get the new key
                 value = value[key]       # get new value
 
+            element = value
             while key != "layer":
                 condition = row[key]
                 value = value[condition]  # go one level deeper
@@ -551,6 +548,7 @@ def main():
                     included_layers.add(v)
                     continue
 
+                assert isinstance(v, dict)  # mainly to keep the linter happy
                 the_id = v["id"]
                 text = v.get("text")
                 url = v.get("url") or v.get("email")
