@@ -1,5 +1,5 @@
 ---
-output: blastula::blastula_email
+output: md_document
 ---
 
 Sehr geehrte Damen und Herren,

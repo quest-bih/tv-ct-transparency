@@ -7,7 +7,7 @@ library(fs)
 library(glue)
 library(stringr)
 
-test_n <- 1
+test_n <- 3
 
 survey_link <- "https://s-quest.bihealth.org/limesurvey/index.php/966385"
 
@@ -229,3 +229,20 @@ trialists %>%
 trialists %>%
   slice_tail(n = test_n) %>%
   purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 4)
+
+
+# Convert to html and remove md -------------------------------------------
+#find ./ -iname "*.md" -type f -exec sh -c 'pandoc "${0}" -o "${0%.md}.html"' {} \;
+#for i in *.md; do pandoc -f markdown -t html -s "$i" > "$i".html; done;
+#for i in *.md ; do echo "$i" && pandoc -s $i -o $i.html ; done
+#https://gist.github.com/atelierbram/09c8fb742f1518f09ff9e4338ab8f7fb
+
+# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/0_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
+# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/1_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
+# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/2_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
+# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/3_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
+# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/4_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
+
+# dir_ls(dir_materials, regexp = "email") %>%
+#   dir_ls(regexp = ".md") %>%
+#   file_delete()
