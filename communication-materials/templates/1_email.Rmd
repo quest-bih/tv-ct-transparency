@@ -1,9 +1,5 @@
 ---
-output: 
-  blastula::blastula_email:
-    header: null
-    footer: null
-    
+output: blastula::blastula_email
 ---
 
 Sehr geehrte Damen und Herren,
