@@ -1,0 +1,231 @@
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(readr)
+library(here)
+library(fs)
+library(glue)
+library(stringr)
+
+test_n <- 1
+
+survey_link <- "https://s-quest.bihealth.org/limesurvey/index.php/966385"
+
+dir_materials <- dir_create(here::here("communication-materials", "materials"))
+dir_templates <- here::here("communication-materials", "templates")
+
+trialists <-
+  read_csv(here("data", "processed", "charite-contacts-per-trialist.csv")) %>%
+
+  # Create filename from trialist name
+  mutate(filename =
+           name %>%
+           str_remove_all(., "\\." ) %>%
+           str_replace_all(., "ä", "ae") %>%
+           str_replace_all(., "ö", "oe") %>%
+           str_replace_all(., "ü", "ue") %>%
+           str_to_lower(.) %>%
+           str_replace_all(" ", "-")
+  )
+
+# How many trialists have how many trials?
+count(trialists, n_trials)
+
+
+# Prepare cross-registrations ---------------------------------------------
+
+crossreg_raw <-  read_csv(here::here("data", "processed", "crossreg.csv"), show_col_types = FALSE)
+
+crossreg <-
+  crossreg_raw %>%
+  filter(resolves & matches) %>%
+  mutate(
+    crossreg_url = case_when(
+      crossreg_registry == "ClinicalTrials.gov" ~
+        paste0("https://clinicaltrials.gov/ct2/show/", crossreg_trn),
+      crossreg_registry == "DRKS" ~
+        paste0("https://www.drks.de/drks_web/navigate.do?navigationId=trial.HTML&TRIAL_ID=", crossreg_trn),
+      crossreg_registry == "EudraCT" ~
+        paste0("https://www.clinicaltrialsregister.eu/ctr-search/search?query=eudract_number:", crossreg_trn),
+      crossreg_registry == "ISRCTN" ~
+        paste0("https://doi.org/10.1186/", crossreg_trn)
+    ),
+
+    crossreg_trn_md = glue::glue("[{crossreg_trn}]({crossreg_url})"),
+
+    crossreg_trn_md = if_else(
+      crossreg_registry == "EudraCT",
+      glue::glue("EudraCT {crossreg_trn_md}"),
+      crossreg_trn_md
+    )
+  ) %>%
+  group_by(id) %>%
+  mutate(
+    crossreg = paste(sort(unique(unlist(crossreg_trn_md))), collapse = " und ")
+  ) %>%
+  ungroup() %>%
+  distinct(id, crossreg) %>%
+  mutate(crossreg = paste0(", sowie ", crossreg))
+
+
+# Prepare trials ----------------------------------------------------------
+
+trackvalue_raw <-
+  read_csv(here("data", "processed", "trackvalue-checked.csv"))
+
+trackvalue <-
+  trackvalue_raw %>%
+  select(id, registry, title, completion_year) %>%
+  mutate(registration = if_else(
+    registry == "ClinicalTrials.gov",
+    paste0("https://clinicaltrials.gov/ct2/show/", id),
+    paste0("https://www.drks.de/drks_web/navigate.do?navigationId=trial.HTML&TRIAL_ID=", id)
+  )) %>%
+  left_join(crossreg, by = "id")
+
+
+# Prepare 0 (launch): one trial -------------------------------------------
+
+trialists_one_trial <-
+  trialists %>%
+  filter(n_trials == 1) %>%
+  rename(
+    id = ids,
+    honorific = title
+  ) %>%
+  left_join(trackvalue, by = "id") %>%
+  mutate(crossreg = replace_na(crossreg, ""))
+
+render_0_one_trial <- function(name, id, registry, registration, title, completion_year, crossreg, filename, survey_link, type, ...){
+
+  if (!type %in% c("letter", "email")) stop("`type` must be 'letter' or 'email'")
+
+  rmarkdown::render(
+    path(dir_templates, glue("0_{type}_one.Rmd")),
+    params = list(
+      name = name,
+      id = id,
+      registry = registry,
+      registration = registration,
+      title = title,
+      completion_year = completion_year,
+      crossreg = crossreg,
+      survey_link = survey_link
+    ),
+    output_dir = dir_create(path(dir_materials, glue("0_{type}"))),
+    output_file = filename
+  )
+}
+
+trialists_one_trial %>%
+  slice_head(n = test_n) %>%
+  # filter(id %in% c("NCT02071615", "DRKS00004858")) %>%
+  # filter(name == "Dimitris Repantis") %>%
+  purrr::pwalk(render_0_one_trial, survey_link = survey_link, type = "letter")
+
+trialists_one_trial %>%
+  slice_head(n = test_n) %>%
+  purrr::pwalk(render_0_one_trial, survey_link = survey_link, type = "email")
+
+
+# Prepare 0 (launch): multi trial -----------------------------------------
+
+trialists_multi_trial <-
+  trialists %>%
+  filter(n_trials > 1) %>%
+  rename(honorific = title) %>%
+
+  # Add trial info
+  separate_rows(ids, sep = "; ") %>%
+  rename(id = ids) %>%
+  left_join(trackvalue, by = "id") %>%
+  mutate(crossreg = replace_na(crossreg, "")) %>%
+  group_by(name) %>%
+
+  # Summarize trial info
+  mutate(
+    min_completion_year = min(completion_year, na.rm = TRUE),
+    max_completion_year = max(completion_year, na.rm = TRUE),
+    registries = paste(sort(unique(unlist(registry))), collapse = " und ")
+  ) %>%
+
+  # Prepare completion years text depending on whether one or more years
+  mutate(
+    completion_years = if_else(
+      min_completion_year == max_completion_year,
+      glue("in {min_completion_year}"),
+      glue("zwischen {min_completion_year} und {max_completion_year}")
+    )
+  ) %>%
+
+  # Nest trial info
+  tidyr::nest(trials = c(id, registry, registration, title, completion_year, crossreg)) %>%
+  ungroup()
+
+render_0_multi_trial <- function(name, registries, completion_years, trials, filename, survey_link, type, ...){
+
+  if (!type %in% c("letter", "email")) stop("`type` must be 'letter' or 'email'")
+
+  rmarkdown::render(
+    path(dir_templates, glue("0_{type}_multi.Rmd")),
+    params = list(
+      name = name,
+      registries = registries,
+      completion_years = completion_years,
+      trials = trials,
+      survey_link = survey_link
+    ),
+    output_dir = dir_create(path(dir_materials, glue("0_{type}"))),
+    output_file = filename
+  )
+}
+
+trialists_multi_trial %>%
+  slice_tail(n = test_n) %>%
+  purrr::pwalk(render_0_multi_trial, survey_link = survey_link, type = "letter")
+
+
+trialists_multi_trial %>%
+  slice_tail(n = test_n) %>%
+  # filter(name == "Marcus Meinzer") %>%
+  purrr::pwalk(render_0_multi_trial, survey_link = survey_link, type = "email")
+
+
+# Prepare 1 (reminder,  cvk) ----------------------------------------------
+rmarkdown::render(
+  path(dir_templates, "1_email.Rmd"),
+  output_dir = dir_create(path(dir_materials, "1_email")),
+  output_file = "cvk"
+
+)
+
+
+# Prepare 2 (reminder) ----------------------------------------------------
+
+render_reminder <- function(name, filename, survey_link, n_reminder, ...){
+  rmarkdown::render(
+    params = list(
+      name = name,
+      survey_link = survey_link
+    ),
+    input = path(dir_templates, glue("{n_reminder}_email.Rmd")),
+    output_dir = dir_create(path(dir_materials, glue("{n_reminder}_email"))),
+    output_file = filename
+  )
+}
+
+trialists %>%
+  slice_tail(n = test_n) %>%
+  purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 2)
+
+# Prepare 3 (reminder) ----------------------------------------------------
+
+trialists %>%
+  slice_tail(n = test_n) %>%
+  purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 3)
+
+# Prepare 4 (reminder,  intervention only) --------------------------------
+
+trialists %>%
+  slice_tail(n = test_n) %>%
+  purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 4)

@@ -17,89 +17,81 @@ reapplied on trials with updated registry data.
 
 The data was last updated on the following dates:
 
--   PubMed: 2021-08-15
--   AACT (ClinicalTrials.gov): 2021-08-15
--   DRKS: 2021-08-15
--   Unpaywall: 2022-02-20
--   ShareYourPaper: 2022-02-20
+-   PubMed: 2022-05-19
+-   AACT (ClinicalTrials.gov): 2022-05-19
+-   DRKS: 2022-05-19
+-   Unpaywall: 2022-05-19
+-   ShareYourPaper: 2022-05-19
 
 For TrackValue, we are interested in Charité-affiliated trials from
 recent years (i.e., more likely PIs are still at Charité), and so limit
 to IntoValue 2 trials with Charité listed as a lead city.
 
-The TrackValue dataset consists of 170 trials, including 149 trials from
-ClinicalTrials.gov and 21 trials from DRKS.
+The TrackValue dataset consists of 168 trials, including 149 trials from
+ClinicalTrials.gov and 19 trials from DRKS.
 
-## Report card transparency elements
+## Report card transparency practices
 
-TrackValue clinical trial transparency report cards may include various
-transparency elements. The current frontrunners are: summary results
-reporting, publication linkage in registry, and open access. All
-potential elements are included below.
-
-### Outline
+TrackValue clinical trial transparency report cards include the
+following practices:
 
 -   registration (boolean)
 
-    -   if registration –&gt; registration (timely)
+    -   if registration –\> registration (timely)
 
 -   summary results (boolean)
 
-    -   if summary results –&gt; summary results (timely)
+    -   if summary results –\> summary results (timely)
 
 -   publication (boolean)
 
-    -   if publication –&gt; publication (timely)
+    -   if publication –\> publication (timely)
 
-    -   if publication –&gt; trn in journal publication (full-text)
+    -   if publication –\> trn in journal publication (full-text)
 
-    -   if publication –&gt; trn in journal publication (abstract)
+    -   if publication –\> trn in journal publication (abstract)
 
-    -   if publication –&gt; publication in registration
+    -   if publication –\> publication in registration
 
-    -   if publication –&gt; open access (closed/open)
+    -   if publication –\> open access (closed/open)
 
-        -   if publication –&gt; if closed –&gt; open access (can/not be
+        -   if publication –\> if closed –\> open access (can/not be
             archived)
-
-As such, some report cards would be a short as 3 items (registration
-timeliness, no summary results, no publication) and some as long as 10
-items (registration timeliness, summary results, publication closed).
 
 ### Table
 
 The table below provides an overview of the percentage and number of
 trials per registry which comply with each element.
 
-| **TrackValue trials transparency elements** | **Overall**, N = 170 | **ClinicalTrials.gov**, N = 149 | **DRKS**, N = 21 |
-|:--------------------------------------------|:---------------------|:--------------------------------|:-----------------|
-| **Prospective registration, n (%)**         | 105 (62%)            | 97 (65%)                        | 8 (38%)          |
-| **Has registry summary results, n (%)**     | 18 (11%)             | 17 (11%)                        | 1 (4.8%)         |
-| **Timely summary results (12 mo), n (%)**   | 10 (56%)             | 10 (59%)                        | 0 (0%)           |
-| Unknown                                     | 152                  | 132                             | 20               |
-| **Timely summary results (24 mo), n (%)**   | 16 (89%)             | 15 (88%)                        | 1 (100%)         |
-| Unknown                                     | 152                  | 132                             | 20               |
-| **Has publication, n (%)**                  | 108 (64%)            | 92 (62%)                        | 16 (76%)         |
-| **Timely publication (24 mo), n (%)**       | 59 (52%)             | 50 (51%)                        | 9 (56%)          |
-| Unknown                                     | 56                   | 51                              | 5                |
-| **TRN reported in abstract, n (%)**         | 41 (38%)             | 39 (42%)                        | 2 (12%)          |
-| Unknown                                     | 62                   | 57                              | 5                |
-| **TRN reported in full-text, n (%)**        | 61 (56%)             | 54 (59%)                        | 7 (44%)          |
-| Unknown                                     | 62                   | 57                              | 5                |
-| **Publication linked in registry, n (%)**   | 56 (50%)             | 51 (53%)                        | 5 (31%)          |
-| Unknown                                     | 57                   | 52                              | 5                |
-| **Openly accessible, n (%)**                | 68 (61%)             | 60 (63%)                        | 8 (50%)          |
-| Unknown                                     | 59                   | 54                              | 5                |
-| **Closed, archivable, n (%)**               | 40 (100%)            | 34 (100%)                       | 6 (100%)         |
-| Unknown                                     | 130                  | 115                             | 15               |
+| **TrackValue trials transparency elements** | **Overall**, N = 168 | **ClinicalTrials.gov**, N = 149 | **DRKS**, N = 19 |
+|:--------------------------------------------|:--------------------:|:-------------------------------:|:----------------:|
+| **Prospective registration, n (%)**         |      104 (62%)       |            97 (65%)             |     7 (37%)      |
+| **Has registry summary results, n (%)**     |       18 (11%)       |            18 (12%)             |      0 (0%)      |
+| **Timely summary results (12 mo), n (%)**   |       10 (53%)       |            10 (56%)             |      0 (0%)      |
+| Unknown                                     |         149          |               131               |        18        |
+| **Timely summary results (24 mo), n (%)**   |       16 (84%)       |            15 (83%)             |     1 (100%)     |
+| Unknown                                     |         149          |               131               |        18        |
+| **Has publication, n (%)**                  |      108 (64%)       |            93 (62%)             |     15 (79%)     |
+| **Timely publication (24 mo), n (%)**       |       60 (53%)       |            51 (52%)             |     9 (60%)      |
+| Unknown                                     |          55          |               51                |        4         |
+| **TRN reported in abstract, n (%)**         |       41 (38%)       |            39 (41%)             |     2 (13%)      |
+| Unknown                                     |          59          |               55                |        4         |
+| **TRN reported in full-text, n (%)**        |       60 (55%)       |            53 (56%)             |     7 (47%)      |
+| Unknown                                     |          59          |               55                |        4         |
+| **Publication linked in registry, n (%)**   |       54 (47%)       |            54 (55%)             |      0 (0%)      |
+| Unknown                                     |          54          |               50                |        4         |
+| **Openly accessible, n (%)**                |       72 (64%)       |            65 (67%)             |     7 (47%)      |
+| Unknown                                     |          56          |               52                |        4         |
+| **Closed, archivable, n (%)**               |      37 (100%)       |            31 (100%)            |     6 (100%)     |
+| Unknown                                     |         131          |               118               |        13        |
 
 ## Trials for intervention outcome measures
 
-Summary results reporting: 152
+Summary results reporting: 150
 
-Publication link in registration: 52
+Publication link in registration: 55
 
-Green OA publication: 37
+Green OA publication: 34
 
 ## EUCTR and other cross-registrations
 
@@ -111,18 +103,64 @@ DRKS. As such, trials in our sample which are cross-registered in EUCTR
 are perhaps more likely clinical trials per German law (and may be more
 likely to fulfil transparency requirements - note: todo).
 
-We found that 27 (16%) trials in our sample include one or more EUCTR
+We found that 26 (15%) trials in our sample include one or more EUCTR
 ids in their registration, and are presumably cross-registered in EUCTR.
-This includes 23 (15%) trials from ClinicalTrials.gov and 4 (19%) trials
+This includes 23 (15%) trials from ClinicalTrials.gov and 3 (16%) trials
 from DRKS.
 
 Considering TRNs both in the registry as well as in the publication, we
 find additional potential cross-registrations in EUCTR as well as in
-other registries (N = 41).
+other registries (N = 40).
 
-| crossreg\_registry | n\_crossreg |
-|:-------------------|------------:|
-| EudraCT            |          38 |
-| ClinicalTrials.gov |          17 |
-| DRKS               |           5 |
-| ISRCTN             |           1 |
+| crossreg_registry  | n_crossreg |
+|:-------------------|-----------:|
+| EudraCT            |         38 |
+| ClinicalTrials.gov |         17 |
+| DRKS               |          1 |
+| ISRCTN             |          1 |
+
+After manual checks of potential cross-registrations, we found 29 trials
+with valid cross-registrations in EUCTR.
+
+## Communication Materials
+
+Invitations and reminders are generated and stored in
+`communication-materials` with the below directory structure. Note that
+`materials` and `signature-letter.pdf` are stored locally.
+
+The communication materials are organized by timepoint and consist of:
+
+-   0 (study launch): personalized letter (pdf) and personalized email
+    (html), with different templates for trialists with one vs. multiple
+    trials
+-   1: generic email (html) from cvk
+-   2: personalized (name only) email (html)
+-   3: personalized (name only) email (html)
+-   4: personalized (name only) email (html), for the intervention only
+
+<!-- -->
+
+    ├── materials
+    │   ├── 0_email
+    │   ├── 0_letter
+    │   ├── 1_email
+    │   │   └── cvk.html
+    │   ├── 2_email
+    │   ├── 3_email
+    │   └── 4_email
+    ├── render-communication-materials.R
+    └── templates
+        ├── 0_email_multi.Rmd
+        ├── 0_email_one.Rmd
+        ├── 0_letter_multi.Rmd
+        ├── 0_letter_one.Rmd
+        ├── 1_email.Rmd
+        ├── 2_email.Rmd
+        ├── 3_email.Rmd
+        ├── 4_email.Rmd
+        ├── body-multi.Rmd
+        ├── body-one.Rmd
+        ├── quest-letterfoot.pdf
+        ├── quest-letterhead.pdf
+        ├── signature-email.Rmd
+        └── signature-letter.pdf

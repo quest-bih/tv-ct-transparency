@@ -1,0 +1,18 @@
+---
+params:
+  name: Baby Yoda
+  registries: ClinicalTrials.gov and DRKS
+  completion_years: zwischen 2014 und 2017
+  trials: null
+  survey_link: https://giphy.com/clips/baby-yoda-PENDxkjEqGPfxmmcFg
+  
+output: blastula::blastula_email
+---
+
+Sehr geehrte/r `r params$name`,
+
+```{r, child="body-multi.Rmd"}
+```
+
+```{r, child="signature-email.Rmd"}
+```

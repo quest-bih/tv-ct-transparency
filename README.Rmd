@@ -27,7 +27,7 @@ This repository supports the clinical trial transparency report card project wit
 ```{r trackvalue-dataset, include = FALSE}
 
 trackvalue <-
-  read_csv(here::here("data", "processed", "trackvalue.csv"))
+  read_csv(here::here("data", "processed", "trackvalue-checked.csv"))
 
 n_ctgov <-
   trackvalue %>% 
@@ -67,11 +67,9 @@ For TrackValue, we are interested in Charité-affiliated trials from recent year
 
 The TrackValue dataset consists of `r nrow(trackvalue)` trials, including `r n_ctgov` trials from ClinicalTrials.gov and `r n_drks` trials from DRKS.
 
-## Report card transparency elements
+## Report card transparency practices
 
-TrackValue clinical trial transparency report cards may include various transparency elements. The current frontrunners are: summary results reporting, publication linkage in registry, and open access. All potential elements are included below.
-
-### Outline
+TrackValue clinical trial transparency report cards include the following practices:
 
 -   registration (boolean)
 
@@ -95,7 +93,6 @@ TrackValue clinical trial transparency report cards may include various transpar
 
         -   if publication --\> if closed --\> open access (can/not be archived)
 
-As such, some report cards would be a short as 3 items (registration timeliness, no summary results, no publication) and some as long as 10 items (registration timeliness, summary results, publication closed).
 
 ### Table
 
@@ -161,10 +158,13 @@ Green OA publication: `r trackvalue %>% filter(has_publication & is_closed_archi
 
 The IntoValue, and hence TrackValue, sample includes trials any interventional study in the registry and is not limited to those regulated by German drug and medical laws. Trials regulated by those rules *should* be registered in EUCTR, rather than ClinicalTrials.gov or DRKS. As such, trials in our sample which are cross-registered in EUCTR are perhaps more likely clinical trials per German law (and may be more likely to fulfil transparency requirements - note: todo).
 
-```{r crossreg}
+```{r crossreg, include = FALSE}
+
+trackvalue_all_crossreg <-
+  read_csv(here::here("data", "processed", "trackvalue.csv"))
 
 tbl_euctr <-
-  trackvalue %>% 
+  trackvalue_all_crossreg %>% 
   tbl_cross(
     row = has_crossreg_eudract,
     col = registry,
@@ -192,4 +192,44 @@ crossreg %>%
   count(crossreg_registry, name = "n_crossreg") %>% 
   arrange(desc(n_crossreg)) %>% 
   knitr::kable()
+```
+
+After manual checks of potential cross-registrations, we found `r filter(trackvalue, has_valid_crossreg_eudract) %>% nrow()` trials with valid cross-registrations in EUCTR.
+
+## Communication Materials
+Invitations and reminders are generated and stored in `communication-materials` with the below directory structure. Note that `materials` and `signature-letter.pdf` are stored locally.
+
+The communication materials are organized by timepoint and consist of:
+
+-   0 (study launch): personalized letter (pdf) and personalized email (html), with different templates for trialists with one vs. multiple trials
+-   1: generic email (html) from cvk
+-   2: personalized (name only) email (html) 
+-   3: personalized (name only) email (html)
+-   4: personalized (name only) email (html), for the intervention only
+
+```
+├── materials
+│   ├── 0_email
+│   ├── 0_letter
+│   ├── 1_email
+│   │   └── cvk.html
+│   ├── 2_email
+│   ├── 3_email
+│   └── 4_email
+├── render-communication-materials.R
+└── templates
+    ├── 0_email_multi.Rmd
+    ├── 0_email_one.Rmd
+    ├── 0_letter_multi.Rmd
+    ├── 0_letter_one.Rmd
+    ├── 1_email.Rmd
+    ├── 2_email.Rmd
+    ├── 3_email.Rmd
+    ├── 4_email.Rmd
+    ├── body-multi.Rmd
+    ├── body-one.Rmd
+    ├── quest-letterfoot.pdf
+    ├── quest-letterhead.pdf
+    ├── signature-email.Rmd
+    └── signature-letter.pdf
 ```
