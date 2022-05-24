@@ -17,6 +17,9 @@ trackvalue_checked <-
   # Add in euctr crossreg data based on manual checks and euctr webscraper
   left_join(euctr_crossreg, by = "id") %>%
 
+  # Recode trials without euctr crossreg to false
+  mutate(has_valid_crossreg_eudract = tidyr::replace_na(has_valid_crossreg_eudract, FALSE)) %>%
+
   # Update open access based on manual checks
   rows_update(oa_checks, by = c("id", "doi"))
 
