@@ -102,12 +102,24 @@ def id_for_publication(row):
     return row["id"]
 
 
-def doi_for_publication(row):
-    doi = row['doi']
-    if not isinstance(doi, str):
-        if np.isnan(doi):
-            doi = "no DOI available"
-    return doi
+def get_publication_title(row):
+    pub_title = (row['pub_title'])
+    if not isinstance(pub_title, str):
+        if np.isnan(pub_title):
+            pub_title = "title not found (doi: " + row['doi'] + ")"
+    pub_title = pub_title.title()
+    cutoff = 50
+    if len(pub_title) > cutoff:
+        pub_title = pub_title[0:cutoff] + "…"
+    return pub_title
+
+
+def get_registry_name(row):
+    registry = row['registry']
+    if not isinstance(registry, str):
+        if np.isnan(registry):
+            registry = "no registry information available"
+    return registry
 
 
 TABLE = {
@@ -122,7 +134,7 @@ TABLE = {
                         "is_closed_archivable": {
                             True: {"layer": "open_access_layer_3"},
                             False: {"layer": "open_access_layer_4"},
-                            np.NaN: {"layer": "open_access_layer_5"}
+                            np.NaN: {"layer": "open_access_layer_4"}
                         }
                     }
                 }
@@ -131,27 +143,23 @@ TABLE = {
     },
     "#summary_results": {
         "has_summary_results": {
-            False: {"layer": "summary_results_layer_1"},
+            False: {"layer": "summary_results_layer_1",
+                    "registry": {
+                        "id": "summary_results_1a_registry",
+                        "text": get_registry_name
+                    }},
             True: {
                 "is_summary_results_1y": {
                     True: {"layer": "summary_results_layer_2",
-                           "link": {
-                               "id": "summary_results_2_link",
-                               "url": gen_registry_url,
-                               "text": id_for_publication
+                           "registry": {
+                               "id": "summary_results_2a_registry",
+                               "text": get_registry_name
                            }},
                     False: {"layer": "summary_results_layer_3",
-                            "link": {
-                                "id": "summary_results_3_link",
-                                "url": gen_registry_url,
-                                "text": id_for_publication
-                            }},
-                    np.NaN: {"layer": "summary_results_layer_4",
-                             "link": {
-                                 "id": "summary_results_4_link",
-                                 "url": gen_registry_url,
-                                 "text": id_for_publication
-                             }}
+                            "registry": {
+                                "id": "summary_results_3a_registry",
+                                "text": get_registry_name,
+                            }}
                 }
 
             }
@@ -166,20 +174,14 @@ TABLE = {
                            "link": {
                                "id": "publication_2_link",
                                "url": url_for_publication,
-                               "text": doi_for_publication
+                               "text": get_publication_title
                            }},
                     False: {"layer": "publication_layer_3",
                             "link": {
                                 "id": "publication_3_link",
                                 "url": url_for_publication,
-                                "text": doi_for_publication
-                            }},
-                    np.NaN: {"layer": "publication_layer_4",
-                             "link": {
-                                 "id": "publication_4_link",
-                                 "url": url_for_publication,
-                                 "text": doi_for_publication
-                             }}
+                                "text": get_publication_title
+                            }}
                 }
             }
         }
@@ -188,10 +190,9 @@ TABLE = {
         "has_publication": {
             False: {"layer": "linkage_layer_na"},
             True: {
-                "has_iv_trn_ft_pdf": {
-                    np.NaN: {"layer": "linkage_layer_1"},
-                    True: {"layer": "linkage_layer_2"},
-                    False: {"layer": "linkage_layer_3"}}
+                "has_iv_trn_ft": {
+                    True: {"layer": "linkage_layer_1"},
+                    False: {"layer": "linkage_layer_2"}}
             }
         }
     },
@@ -200,9 +201,8 @@ TABLE = {
             False: {"layer": "linkage_layer_na"},
             True: {
                 "has_iv_trn_abstract": {
-                    np.NaN: {"layer": "linkage_layer_4"},
-                    True: {"layer": "linkage_layer_5"},
-                    False: {"layer": "linkage_layer_6"}
+                    True: {"layer": "linkage_layer_3"},
+                    False: {"layer": "linkage_layer_4"}
                 }
             }
         }
@@ -212,17 +212,24 @@ TABLE = {
             False: {"layer": "linkage_layer_na"},
             True: {
                 "has_reg_pub_link": {
-                    np.NaN: {"layer": "linkage_layer_7"},
-                    True: {"layer": "linkage_layer_8"},
-                    False: {"layer": "linkage_layer_9"}
+                    True: {"layer": "linkage_layer_5"},
+                    False: {"layer": "linkage_layer_6"}
                 }
             }
         }
     },
     "#registration": {
         "is_prospective": {
-            True: {"layer": "registration_layer_1"},
-            False: {"layer": "registration_layer_2"}
+            True: {"layer": "registration_layer_1",
+                   "registry": {
+                       "id": "registration_1_registry",
+                       "text": get_registry_name
+                   }},
+            False: {"layer": "registration_layer_2",
+                    "registry": {
+                        "id": "registration_2_registry",
+                        "text": get_registry_name
+                    }}
         }
     }
 }
@@ -252,10 +259,10 @@ def main():
 
     # Define layer characteristics in each module
     layers = [{'name': 'registration', 'number': 2, 'na': False},
-              {'name': 'summary_results', 'number': 4, 'na': False},
-              {'name': 'publication', 'number': 4, 'na': False},
-              {'name': 'linkage', 'number': 9, 'na': True},
-              {'name': 'open_access', 'number': 5, 'na': True}]
+              {'name': 'summary_results', 'number': 3, 'na': False},
+              {'name': 'publication', 'number': 3, 'na': False},
+              {'name': 'linkage', 'number': 6, 'na': True},
+              {'name': 'open_access', 'number': 4, 'na': True}]
 
     # Build a set of all layers
     all_layers = get_all_layers(layers)
@@ -271,8 +278,14 @@ def main():
         name = row['id']
         outfile = os.path.join(args.outdir, f"{name}.svg")
 
-        # Add correct TRN
+        # Add trial registration number
         replace(root, "text", "TRN", row['id'], gen_registry_url(row))
+        # Add title of trial
+        title = row['title']
+        cutoff = 80
+        if len(title) > cutoff:
+            title = title[0:cutoff] + "…"
+        replace(root, "text", "title", title)
 
         for key, value in TABLE.items():
             if key.startswith("#"):
@@ -294,6 +307,11 @@ def main():
                 the_id = link["id"]
                 text = link["text"](row)
                 replace(root, "text", the_id, text, url)
+            registry = element.get("registry")
+            if registry:
+                the_id = registry["id"]
+                text = registry["text"](row)
+                replace(root, "text", the_id, text)
 
         # Define which layers need to be excluded for this trial
         layers_to_exclude = all_layers - included_layers
@@ -319,91 +337,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# If no summary results found -> summary_results_layer_1
-#if not row['has_summary_results']:
-#    included_layers.add("summary_results_layer_1")
-# If summary results AND timely -> summary_results_layer_2 and add link in summary_results_2_link
-#elif row['has_summary_results'] and row['is_summary_results_1y'] is True:
-#    included_layers.add("summary_results_layer_2")
-#    replace(root, "text", "summary_results_2_link", row['id'], gen_registry_url(row))
-# If summary results but NOT timely -> summary_results_layer_3 and add link in summary_results_3_link
-#elif row['has_summary_results'] and not row['is_summary_results_1y']:
-#    included_layers.add("summary_results_layer_3")
-#    replace(root, "text", "summary_results_3_link", row['id'], gen_registry_url(row))
-# If summary results but NO DATA on timeliness -> summary_results_layer_4 and add link in summary_results_4_link
-#elif row['has_summary_results'] and np.isnan(row['is_summary_results_1y']):
-#    included_layers.add("summary_results_layer_4")
-#    replace(root, "text", "summary_results_4_link", row['id'], gen_registry_url(row))
-
-# If no publication found -> publication_layer_1
-#if not row['has_publication']:
-#    included_layers.add("publication_layer_1")
-# If publication found AND timely -> publication_layer_2 and add link in publication_2_link
-#elif row['has_publication'] and row['is_publication_2y'] is True:
-#    included_layers.add("publication_layer_2")
-#    replace(root, "text", "publication_2_link", row['id'], row['url'])
-# If publication found but NOT timely -> publication_layer_3 and add link in publication_3_link
-#elif row['has_publication'] and not row['is_publication_2y']:
-#    included_layers.add("publication_layer_3")
-#    replace(root, "text", "publication_3_link", row['id'], row['url'])
-# If publication found but NO DATA on timeliness -> publication_layer_3 and add link in publication_3_link
-#elif row['has_publication'] and np.isnan(row['is_publication_2y']):
-#    included_layers.add("publication_layer_3")
-#    replace(root, "text", "publication_3_link", row['id'], row['url'])
-
-# if TRN box not applicable as pub NOT FOUND -> linkage_layer_na
-#if not row['has_publication']:
-#    included_layers.add("linkage_layer_na")
-# if NO DATA for TRN in full text
-#elif np.isnan(row['has_iv_trn_ft_pdf']):
-#    included_layers.add("linkage_layer_1")
-# if TRN in full text
-#elif row['has_iv_trn_ft_pdf'] is True:
-#    included_layers.add("linkage_layer_2")
-# if TRN NOT in full text
-#elif not row['has_iv_trn_ft_pdf']:
-#    included_layers.add("linkage_layer_3")
-
-#if not row['has_publication']:
-#    included_layers.add("linkage_layer_na")
-# if NO DATA for TRN in abstract
-#elif np.isnan(row['has_iv_trn_abstract']):
-#    included_layers.add("linkage_layer_4")
-# if TRN in abstract
-#elif row['has_iv_trn_abstract'] is True:
-#    included_layers.add("linkage_layer_5")
-# if TRN NOT in abstract
-#elif not row['has_iv_trn_abstract']:
-#    included_layers.add("linkage_layer_6")
-
-#if not row['has_publication']:
-#    included_layers.add("linkage_layer_na")
-# if NO DATA for pub linked in reg
-#elif np.isnan(row['has_reg_pub_link']):
-#    included_layers.add("linkage_layer_7")
-# if pub linked in reg
-#elif row['has_reg_pub_link'] is True:
-#    included_layers.add("linkage_layer_8")
-# if pub NOT linked in reg
-#elif not row['has_reg_pub_link']:
-#    included_layers.add("linkage_layer_9")
-
-# If not applicable as pub NOT FOUND -> open_access_layer_na
-#if not row['has_publication']:
-#    included_layers.add("open_access_layer_na")
-# If pub is open access -> open_access_layer_1
-#elif row['is_oa'] is True:
-#    included_layers.add("open_access_layer_1")
-# If NO DATA on open access status -> open_access_layer_2
-#elif np.isnan(row['is_oa']):
-#    included_layers.add("open_access_layer_2")
-# If pub is NOT open access AND CAN be made accessible -> open_access_layer_3
-#elif not row['is_oa'] and row['is_closed_archivable'] is True:
-#    included_layers.add("open_access_layer_3")
-# If pub is NOT open access AND CANNOT be made accessible -> open_access_layer_4
-#elif not row['is_oa'] and not row['is_closed_archivable']:
-#    included_layers.add("open_access_layer_4")
-# If pub is NOT open access AND NO permissions data -> open_access_layer_5
-#elif not row['is_oa'] and np.isnan(row['is_closed_archivable']):
-#    included_layers.add("open_access_layer_5")
