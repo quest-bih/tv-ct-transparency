@@ -377,7 +377,7 @@ if (!fs::file_exists(euctr_data_path)){
   euctr_scrape = TRUE
 } else {
   euctr_data <- readr::read_csv(euctr_data_path)
-  if(!all(euctr_trns$trn %in% euctr_data$trn)){
+  if(!all(euctr_trns$trn %in% euctr_data$trn_eudract)){
     euctr_scrape = TRUE
   } else euctr_scrape = FALSE
 }
