@@ -171,9 +171,8 @@ def get_registry_name(row):
 
 def get_days_reg_to_start(row):
     days_reg_to_start = abs(row['days_reg_to_start'])
-    if not isinstance(days_reg_to_start, str):
-        if np.isnan(days_reg_to_start):
-            days_reg_to_start = "N/A"
+    if np.isnan(days_reg_to_start):
+        days_reg_to_start = "N/A"
     return days_reg_to_start
 
 
