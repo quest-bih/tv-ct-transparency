@@ -14,7 +14,7 @@ queries_log_path <- file_create(here("data", "queries.log"))
 # Get data ----------------------------------------------------------------
 
 trackvalue <-
-  read_csv(here("data", "processed", "trackvalue.csv"))
+  read_csv(here("data", "processed", "trackvalue-checked.csv"))
 
 # Get ctgov historical versions
 ctgov_trns <-
@@ -571,9 +571,9 @@ charite_contacts_missing_email <-
 
 nrow(charite_contacts_missing_email)
 
-write_csv(charite_contacts_missing_email, here("data", "manual", "charite-contacts-missing-email.csv"))
+write_csv(charite_contacts_missing_email, here("data", "manual", "contacts", "charite-contacts-missing-email.csv"))
 
-coded_charite_contacts_missing_email <- read_csv(here("data", "manual", "charite-contacts-missing-email_coded.csv"))
+coded_charite_contacts_missing_email <- read_csv(here("data", "manual", "contacts", "charite-contacts-missing-email_coded.csv"))
 
 # Compare coded and uncoded
 anti_join(charite_contacts_missing_email, coded_charite_contacts_missing_email, by = "name")
