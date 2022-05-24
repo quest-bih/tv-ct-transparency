@@ -1,0 +1,42 @@
+---
+opening: "`r paste0('Sehr geehrte/r ', params$name, ',')`"
+closing: Mit freundlichen Grüßen
+date: 25.05.2022
+address:
+- "**Pilotstudie zur Transparenz von klinischen Studien**"
+return-address: 
+- 
+- TrackValue Team, QUEST
+- quest-trackvalue@bih-charite.de
+
+letterhead: quest-letterhead.pdf
+letterfoot: quest-letterfoot.pdf
+signature: signature-letter.pdf
+signature-before: -2ex
+signature-after: 0ex
+
+inline-links: true
+papersize: a4
+
+params:
+  name: Baby Yoda
+  registries: ClinicalTrials.gov and DRKS
+  completion_years: zwischen 2014 und 2017
+  trials: null
+  survey_link: https://giphy.com/clips/baby-yoda-PENDxkjEqGPfxmmcFg
+  
+colorlinks: true
+
+header-includes:
+   - \usepackage[default]{FiraSans}
+   - \usepackage[T1]{fontenc}
+   - \usepackage[none]{hyphenat}
+mainfont: FiraSans
+fontsize: 10pt
+
+output: linl::linl
+---
+
+
+```{r, child="body-multi.Rmd"}
+```

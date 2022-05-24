@@ -1,0 +1,21 @@
+die Charité möchte sicherstellen, dass alle klinischen Studien an der Charité den etablierten "best practices" für Studienregistrierung und -reporting folgen. Um dieses Vorhaben zu unterstützen, führen das BIH QUEST Center for Responsible Research und das Charité Clinical Study Center (CSC) - im Rahmen der Wellcome-Trust-geförderten Translationspartnerschaft (Leiter der Partnerschaft: Prof. Dr. Pries) - eine **Pilotstudie** durch.
+
+Für diese haben wir 168 abgeschlossene klinische Studien, bei denen die Charité der Sponsor ist oder deren PI eine Charité-Affiliation hat, hinsichtlich verschiedener Transparenzaspekten gesichtet, so auch Ihre Studien, die in `r params$registries` registriert und `r params$completion_years` abgeschlossen wurden:
+
+```{r prepare-trials-table, echo = FALSE, results = "asis"}
+params$trials %>% 
+  mutate(trial = glue::glue("- {title} ([{id}]({registration}){crossreg})")) %>%
+  select(trial) %>%
+  pull(trial) %>%
+  cat(sep = "\n")
+```
+
+Im Anhang finden Sie Ihre studienspezifischen *Report Cards* zu diesen Transparenzkriterien. Ein beigefügtes *Infosheet* beinhaltet außerdem Informationen zu den relevanten Richtlinien und Vorschriften für die Transparenz klinischer Studien. Die Ergebnisse dieser Pilotstudie sind wichtig, um zu entscheiden, ob Report Cards und Infosheets in dieser oder anderer Form weiter an der Charité sowie an anderen Universitätskliniken eingesetzt werden sollen.
+
+Wir möchten Sie bitten:
+
+1.  Ihre **Report Cards** und das **Infosheet** anzuschauen (im Anhang)
+2.  an der kurzen anonymen **Umfrage** (5 Minuten) teilzunehmen, mit der wir die Nützlichkeit dieses neuen Report Card/Infosheet Ansatzes evaluieren: [`r params$survey_link`](`r params$survey_link`).
+3.  die **Transparenz** Ihren Studien sicherzustellen: Ihre Report Cards zeigen einige Bereiche an, in denen Sie die Transparenz Ihren Studien noch weiter verbessern können und enthalten konkrete Empfehlungen. In 3 Monaten werden wir eine erneute Evaluation Ihren Studien durchführen.
+
+Sie erfahren mehr über unser Projekt, inklusive der Methoden, auf der [QUEST-Projektseite](https://www.bihealth.org/de/translation/innovationstreiber/quest-center/projekte/translationale-bioethik/trackvalue). Falls Sie Fragen haben oder uns weitere Rückmeldung geben möchten, melden Sie sich gerne unter folgender E-Mail-Adresse: [quest-trackvalue@bih-charite.de](mailto:quest-trackvalue@bih-charite.de).

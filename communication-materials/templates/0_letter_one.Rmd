@@ -1,0 +1,44 @@
+---
+opening: "`r paste0('Sehr geehrte/r ', params$name, ',')`"
+closing: Mit freundlichen Grüßen
+date: 25.05.2022
+address:
+- "`r paste0('**Pilotstudie zur Transparenz von klinischen Studien (Ihre Studie ', params$id, ')**')`"
+return-address: 
+- 
+- TrackValue Team, QUEST
+- quest-trackvalue@bih-charite.de
+
+letterhead: quest-letterhead.pdf
+letterfoot: quest-letterfoot.pdf
+signature: signature-letter.pdf
+signature-before: -4ex
+signature-after: 0ex
+
+inline-links: true
+papersize: a4
+
+params:
+  name: Baby Yoda
+  id: NCT12345678
+  registry: ClinicalTrials.gov
+  registration: https://clinicaltrials.gov/ct2/show/NCT12345678
+  title: Green Tea cures everything
+  completion_year: 2018
+  crossreg: ""
+  survey_link: https://giphy.com/clips/baby-yoda-PENDxkjEqGPfxmmcFg
+
+colorlinks: true
+
+header-includes:
+   - \usepackage[default]{FiraSans}
+   - \usepackage[T1]{fontenc}
+   - \usepackage[none]{hyphenat}
+mainfont: FiraSans
+fontsize: 10pt
+
+output: linl::linl
+---
+
+```{r, child="body-one.Rmd"}
+```

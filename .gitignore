@@ -13,3 +13,7 @@ docs/
 
 # PDFs
 data/manual/crossreg/pdfs/
+
+# Communication materials
+communication-materials/materials/
+communication-materials/templates/signature-letter.pdf

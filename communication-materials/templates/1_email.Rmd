@@ -1,0 +1,24 @@
+---
+output: 
+  blastula::blastula_email:
+    header: null
+    footer: null
+    
+---
+
+Sehr geehrte Damen und Herren,
+
+am [DATUM] haben Sie eine E-Mail mit dem Titel **"Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"** mit individualisierter(n) Report Card(s) erhalten. Ich lade Sie ein, die Materialien durchzusehen, die Umfrage auszufüllen und gegebenenfalls die Transparenz Ihrer Studie(n) zu erhöhen. Bei Rückfragen, Anmerkungen oder falls Sie Ihre Unterlagen nicht finden können, wenden Sie sich bitte an das BIH-QUEST unter: quest-trackvalue@bih-charite.de.
+
+Wir danken Ihnen für Ihre Mitarbeit.
+
+Herzliche Grüße,
+
+Christof von Kalle
+
+
+------------------------------------------------------------------------
+
+
+<p><span style="color:#999999;"><span style="font-size:11px;">Univ. Prof. Dr. Christof von Kalle<br />Direktor Clinical Study Center<br />BIH Chair für Klinisch-Translationale Wissenschaften<br />Berlin Institute of Health at Charité – Universitätsmedizin Berlin<br />Charitéplatz 1, 10117 Berlin, Germany<br />christof.kalle@bih-charite.de<br />+49 30 450 543 110</span></span></p>
+
