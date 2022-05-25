@@ -5,6 +5,10 @@ library(stringr)
 data <- read_csv("data/processed/charite-contacts-per-trialist.csv")
 
 email_parameters <- data %>%
+
+  # Remove a duplicate trialist with flipped name
+  filter(name != "Worm Margitta") %>%
+
   mutate(
     name_for_file = gsub("\\.", "", name),
     name_for_file = str_replace_all(name_for_file, "ä", "ae"),
