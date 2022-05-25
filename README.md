@@ -128,6 +128,8 @@ Invitations and reminders are generated and stored in
 `communication-materials` with the below directory structure. Note that
 `materials` and `signature-letter.pdf` are stored locally.
 
+The pipeline for email creation is: Rmarkdown –\> Markdown –\> HTML
+
 The communication materials are organized by timepoint and consist of:
 
 -   0 (study launch): personalized letter (pdf) and personalized email

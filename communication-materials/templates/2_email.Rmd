@@ -2,14 +2,14 @@
 params:
   name: Baby Yoda
   survey_link: https://giphy.com/clips/baby-yoda-PENDxkjEqGPfxmmcFg
-output: blastula::blastula_email
+output: md_document
 ---
 
 Sehr geehrte/r `r params$name`,
 
-am [DATUM] haben wir Ihnen individuelles Feedback und Hinweise zu Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben. Sie haben die Möglichkeit, zu einer höheren Transparenz klinischer Studien an der Charité beizutragen und Materialien mitzugestalten, die für zukünftige Studien an der Charité oder auch an anderen deutschen Universitätskliniken übernommen werden können.
+am 25. Mai haben wir Ihnen ein individuelles Feedback und Hinweise zu Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben. Sie haben die Möglichkeit, zu einer höheren Transparenz klinischer Studien an der Charité beizutragen und Materialien mitzugestalten, die für zukünftige Studien an der Charité oder auch an anderen deutschen Universitätskliniken übernommen werden können.
 
-Falls Sie es noch nicht getan haben, laden wir Sie ein, Ihre Materialien durchzusehen und die kurze (5-minütige), anonyme Umfrage auszufüllen: [`r params$survey_link`](`r params$survey_link`). Möglicherweise hat die Report Card auch auf einige Verbesserungsmöglichkeiten aufgezeigt, die wir Ihnen für Ihre Studie empfehlen, und die wir in 2,5 Monaten erneut bewerten werden.
+Falls Sie es noch nicht getan haben, laden wir Sie ein, Ihre Materialien durchzusehen und die kurze (5-minütige), anonyme Umfrage auszufüllen: [`r params$survey_link`](`r params$survey_link`). Sollten für Ihre Studie(n) Verbesserungsmöglichkeiten bestehen, die wir empfehlen, zeigt Ihnen die Report Card diese auf. Wir werden Ihre Studie(n) im Rahmen unserer erwähnten Pilotstudie in 2,5 Monaten erneut bewerten.
 
 Wir danken Ihnen, dass Sie sich die Zeit nehmen, die Transparenz Ihrer Studie sicherzustellen, und uns dabei zu helfen, diese Materialien so informativ und hilfreich wie möglich zu gestalten.
 

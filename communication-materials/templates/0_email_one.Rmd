@@ -9,7 +9,7 @@ params:
   crossreg: ""
   survey_link: https://giphy.com/clips/baby-yoda-PENDxkjEqGPfxmmcFg
 
-output: blastula::blastula_email
+output: md_document
 ---
 Sehr geehrte/r `r params$name`,
 
