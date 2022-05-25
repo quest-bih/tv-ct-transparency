@@ -7,7 +7,7 @@ library(fs)
 library(glue)
 library(stringr)
 
-test_n <- 3
+# test_n <- 3
 
 survey_link <- "https://s-quest.bihealth.org/limesurvey/index.php/966385"
 
@@ -250,24 +250,26 @@ render_reminder <- function(name, filename, survey_link, n_reminder, ...){
 
 
 trialists %>%
-  slice_tail(n = test_n) %>%
+  # slice_tail(n = test_n) %>%
   purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 2)
 
 # Prepare 3 (reminder) ----------------------------------------------------
 
 trialists %>%
-  slice_tail(n = test_n) %>%
+  # slice_tail(n = test_n) %>%
   purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 3)
 
 # Prepare 4 (reminder,  intervention only) --------------------------------
 
 trialists %>%
-  slice_tail(n = test_n) %>%
+  # slice_tail(n = test_n) %>%
   purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 4)
 
 
 # Convert to html and remove md -------------------------------------------
-# cd ../0_email
+# send line to terminal: cmd+opt+enter
+# cd communication-materials/materials
+# cd 0_email
 # find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
 # cd ../2_email
 # find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
@@ -279,3 +281,13 @@ trialists %>%
 # dir_ls(dir_materials, regexp = "email") %>%
 #   dir_ls(regexp = ".md") %>%
 #   file_delete()
+
+
+# Check all email created
+emails <-
+  dir_ls(path(dir_materials, "4_email"), regexp = "template", invert = TRUE) %>%
+  path_file() %>%
+  path_ext_remove()
+
+all(emails %in% trialists$filename)
+all(trialists$filename %in% emails)
