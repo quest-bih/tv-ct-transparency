@@ -7,7 +7,7 @@ output: md_document
 
 Sehr geehrte/r `r params$name`,
 
-Wir haben Ihnen am [DATUM] ein individuelles Feedback und Anleitungen zur Transparenz Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben und Sie in dieser anonymen, 5-minütigen Umfrage um Ihre Meinung zu den Materialien gebeten: [`r params$survey_link`](`r params$survey_link`).
+Wir haben Ihnen am 25. Mai ein individuelles Feedback und Anleitungen zur Transparenz Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben und Sie in dieser anonymen, 5-minütigen Umfrage um Ihre Meinung zu den Materialien gebeten: [`r params$survey_link`](`r params$survey_link`).
 
 Einige [#] Ihrer Charité-Kolleg:innen haben bereits ihre Meinung zu der Report Card und dem Infosheet geäußert. Falls Sie es noch nicht getan haben, möchten wir Sie hiermit bitten, die kurze Umfrage auszufüllen, bevor sie **morgen** abläuft.
 
