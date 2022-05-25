@@ -17,6 +17,9 @@ dir_templates <- here::here("communication-materials", "templates")
 trialists <-
   read_csv(here("data", "processed", "charite-contacts-per-trialist.csv")) %>%
 
+  # Remove a duplicate trialist with flipped name
+  filter(name != "Worm Margitta") %>%
+
   # Create filename from trialist name
   mutate(filename =
            name %>%
@@ -81,7 +84,13 @@ trackvalue <-
     paste0("https://clinicaltrials.gov/ct2/show/", id),
     paste0("https://www.drks.de/drks_web/navigate.do?navigationId=trial.HTML&TRIAL_ID=", id)
   )) %>%
-  left_join(crossreg, by = "id")
+  left_join(crossreg, by = "id") %>%
+
+  # Edit some problematic characters
+  mutate(title =
+           str_replace(title, "μg", "micrograms") %>%
+           str_remove(., "\u0093")
+  )
 
 
 # Prepare 0 (launch): one trial -------------------------------------------
@@ -100,31 +109,37 @@ render_0_one_trial <- function(name, id, registry, registration, title, completi
 
   if (!type %in% c("letter", "email")) stop("`type` must be 'letter' or 'email'")
 
-  rmarkdown::render(
-    path(dir_templates, glue("0_{type}_one.Rmd")),
-    params = list(
-      name = name,
-      id = id,
-      registry = registry,
-      registration = registration,
-      title = title,
-      completion_year = completion_year,
-      crossreg = crossreg,
-      survey_link = survey_link
-    ),
-    output_dir = dir_create(path(dir_materials, glue("0_{type}"))),
-    output_file = filename
-  )
+  out_dir <- dir_create(path(dir_materials, glue("0_{type}")))
+  out_file <- path(out_dir, filename, ext = ifelse(type == "letter", "pdf", "md"))
+
+  if (!file_exists(out_file)){
+    rmarkdown::render(
+      path(dir_templates, glue("0_{type}_one.Rmd")),
+      params = list(
+        name = name,
+        id = id,
+        registry = registry,
+        registration = registration,
+        title = title,
+        completion_year = completion_year,
+        crossreg = crossreg,
+        survey_link = survey_link
+      ),
+      output_file = out_file
+    )
+  }
+
+  if (type == "email"){
+    try(file_copy(path(dir_templates, "template.html"), path(out_dir, "template.html"), overwrite = FALSE), silent = TRUE)
+  }
 }
 
 trialists_one_trial %>%
-  slice_head(n = test_n) %>%
-  # filter(id %in% c("NCT02071615", "DRKS00004858")) %>%
-  # filter(name == "Dimitris Repantis") %>%
+  # slice_head(n = test_n) %>%
   purrr::pwalk(render_0_one_trial, survey_link = survey_link, type = "letter")
 
 trialists_one_trial %>%
-  slice_head(n = test_n) %>%
+  # slice_head(n = test_n) %>%
   purrr::pwalk(render_0_one_trial, survey_link = survey_link, type = "email")
 
 
@@ -166,29 +181,44 @@ render_0_multi_trial <- function(name, registries, completion_years, trials, fil
 
   if (!type %in% c("letter", "email")) stop("`type` must be 'letter' or 'email'")
 
-  rmarkdown::render(
-    path(dir_templates, glue("0_{type}_multi.Rmd")),
-    params = list(
-      name = name,
-      registries = registries,
-      completion_years = completion_years,
-      trials = trials,
-      survey_link = survey_link
-    ),
-    output_dir = dir_create(path(dir_materials, glue("0_{type}"))),
-    output_file = filename
-  )
+  out_dir <- dir_create(path(dir_materials, glue("0_{type}")))
+  out_file <- path(out_dir, filename, ext = ifelse(type == "letter", "pdf", "md"))
+
+  if (!file_exists(out_file)){
+    rmarkdown::render(
+      path(dir_templates, glue("0_{type}_multi.Rmd")),
+      params = list(
+        name = name,
+        registries = registries,
+        completion_years = completion_years,
+        trials = trials,
+        survey_link = survey_link
+      ),
+      output_file = out_file
+    )
+  }
+
+  if (type == "email"){
+    try(file_copy(path(dir_templates, "template.html"), path(out_dir, "template.html"), overwrite = FALSE), silent = TRUE)
+  }
 }
 
 trialists_multi_trial %>%
-  slice_tail(n = test_n) %>%
+  # slice_tail(n = test_n) %>%
   purrr::pwalk(render_0_multi_trial, survey_link = survey_link, type = "letter")
 
-
 trialists_multi_trial %>%
-  slice_tail(n = test_n) %>%
-  # filter(name == "Marcus Meinzer") %>%
+  # slice_tail(n = test_n) %>%
   purrr::pwalk(render_0_multi_trial, survey_link = survey_link, type = "email")
+
+# Check all letters created
+letters <-
+  dir_ls(path(dir_materials, "0_letter")) %>%
+  path_file() %>%
+  path_ext_remove()
+
+all(letters %in% trialists$filename)
+all(trialists$filename %in% letters)
 
 
 # Prepare 1 (reminder,  cvk) ----------------------------------------------
@@ -196,23 +226,28 @@ rmarkdown::render(
   path(dir_templates, "1_email.Rmd"),
   output_dir = dir_create(path(dir_materials, "1_email")),
   output_file = "cvk"
-
 )
 
 
 # Prepare 2 (reminder) ----------------------------------------------------
 
 render_reminder <- function(name, filename, survey_link, n_reminder, ...){
+
+  out_dir <- dir_create(path(dir_materials, glue("{n_reminder}_email")))
+
   rmarkdown::render(
     params = list(
       name = name,
       survey_link = survey_link
     ),
     input = path(dir_templates, glue("{n_reminder}_email.Rmd")),
-    output_dir = dir_create(path(dir_materials, glue("{n_reminder}_email"))),
+    output_dir = out_dir,
     output_file = filename
   )
+
+  try(file_copy(path(dir_templates, "template.html"), path(out_dir, "template.html"), overwrite = FALSE), silent = TRUE)
 }
+
 
 trialists %>%
   slice_tail(n = test_n) %>%
@@ -232,16 +267,14 @@ trialists %>%
 
 
 # Convert to html and remove md -------------------------------------------
-#find ./ -iname "*.md" -type f -exec sh -c 'pandoc "${0}" -o "${0%.md}.html"' {} \;
-#for i in *.md; do pandoc -f markdown -t html -s "$i" > "$i".html; done;
-#for i in *.md ; do echo "$i" && pandoc -s $i -o $i.html ; done
-#https://gist.github.com/atelierbram/09c8fb742f1518f09ff9e4338ab8f7fb
-
-# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/0_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
-# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/1_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
-# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/2_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
-# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/3_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
-# for i in /Users/maia/Documents/Repositories/tv-ct-transparency/communication-materials/materials/4_email/*.md; do pandoc -f markdown -t html -s "${i}" > "${i%.md}".html; done;
+# cd ../0_email
+# find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
+# cd ../2_email
+# find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
+# cd ../3_email
+# find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
+# cd ../4_email
+# find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
 
 # dir_ls(dir_materials, regexp = "email") %>%
 #   dir_ls(regexp = ".md") %>%

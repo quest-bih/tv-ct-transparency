@@ -7,9 +7,9 @@ output: md_document
 
 Sehr geehrte/r `r params$name`,
 
-In früheren E-Mails haben wir Ihnen individuelles Feedback und Hinweise zu Ihrer klinischen Studie (siehe Anhang) übermittelt. Die Report Card Ihrer Studie kann konkrete Hinweise darauf enthalten, wie Sie die Transparenz Ihrer Prüfung(en) verbessern können, um sie an internationale Standards anzupassen. Wir bitten Sie dringend, die beigefügten Unterlagen durchzusehen und die vorgeschlagenen Verbesserungen vorzunehmen.
+In früheren E-Mails haben wir Ihnen individuelles Feedback und Hinweise zu Ihrer klinischen Studie (siehe Anhang) übermittelt. Sollten für Ihre Studie(n) Verbesserungsmöglichkeiten bestehen, gibt Ihre Report Card dazu Hinweise, wie Sie die Transparenz Ihrer Studien(en) noch weiter an internationale Standards anpassen können. Wir möchten Sie bitten, die beigefügten Unterlagen durchzusehen und die vorgeschlagenen Verbesserungen vorzunehmen.
 
-In **2 Wochen** werden wir eine erneute Evaluation der Transparenz Ihrer Studie durchführen.
+In **2 Wochen** werden wir im Rahmen unserer erwähnten Pilotstudie eine erneute Evaluation der Transparenz Ihrer Studie durchführen.
 
 Wir danken Ihnen noch einmal für Ihre Teilnahme an dieser Studie.
 

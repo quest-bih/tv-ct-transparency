@@ -4,7 +4,7 @@ output: md_document
 
 Sehr geehrte Damen und Herren,
 
-am [DATUM] haben Sie eine E-Mail mit dem Titel **"Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"** mit individualisierter(n) Report Card(s) erhalten. Ich lade Sie ein, die Materialien durchzusehen, die Umfrage auszufüllen und gegebenenfalls die Transparenz Ihrer Studie(n) zu erhöhen. Bei Rückfragen, Anmerkungen oder falls Sie Ihre Unterlagen nicht finden können, wenden Sie sich bitte an das BIH-QUEST unter: quest-trackvalue@bih-charite.de.
+am 25. Mai haben Sie eine E-Mail mit dem Titel **"Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"** mit individualisierter(n) Report Card(s) erhalten. Ich möchte Sie hiermit einladen, die Materialien durchzusehen, die Umfrage auszufüllen und gegebenenfalls die Transparenz Ihrer Studie(n) zu erhöhen. Bei Rückfragen, Anmerkungen oder falls Sie Ihre Unterlagen nicht finden können, wenden Sie sich bitte an das BIH-QUEST unter: quest-trackvalue@bih-charite.de.
 
 Wir danken Ihnen für Ihre Mitarbeit.
 
