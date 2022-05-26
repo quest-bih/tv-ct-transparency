@@ -13,7 +13,7 @@ trackvalue <-
   read_csv(here("data", "processed", "trackvalue-checked.csv"))
 
 
-trackvalue %>%
+wcri_trial <- trackvalue %>%
   add_row(id = "NCT12345678") %>%
   filter(id == "NCT12345678") %>%
   mutate(
@@ -48,11 +48,13 @@ trackvalue %>%
     is_closed_archivable = TRUE,
 
     # Cross-registration to EUCTR
-    has_crossreg_eudract = TRUE,
-    registration_date_eudract = "2018-02-01",
-    start_date_eudract = "2018-03-15",
-    completion_date_eudract = "2019-02-10",
-    is_prospective_eudract = TRUE,
-    has_summary_results_eudract = TRUE,
-    is_summary_results_1y_eudract = FALSE
+    has_valid_crossreg_eudract = FALSE,
+    registration_date_eudract = NA,
+    start_date_eudract = NA,
+    completion_date_eudract = NA,
+    is_prospective_eudract = NA,
+    has_summary_results_eudract = NA,
+    is_summary_results_1y_eudract = NA
   )
+
+write_csv(wcri_trial, here("data", "processed", "wcri-report-card.csv"))
