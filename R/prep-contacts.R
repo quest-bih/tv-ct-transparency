@@ -788,6 +788,20 @@ tv_charite_contacts_per_trialist %>%
   semi_join(tv_charite_contacts, ., by = "name") %>%
   select(name, registry, id)
 
+# Create filename from trialist name
+tv_charite_contacts_per_trialist <-
+  tv_charite_contacts_per_trialist %>%
+
+  mutate(name_for_file =
+           name %>%
+           str_remove_all(., "\\." ) %>%
+           str_replace_all(., "ä", "ae") %>%
+           str_replace_all(., "ö", "oe") %>%
+           str_replace_all(., "ü", "ue") %>%
+           str_to_lower(.) %>%
+           str_replace_all(" ", "-")
+  )
+
 write_csv(tv_charite_contacts, here("data", "processed", "charite-contacts.csv"))
 write_csv(tv_charite_contacts_per_trial, here("data", "processed", "charite-contacts-per-trial.csv"))
 write_csv(tv_charite_contacts_per_trialist, here("data", "processed", "charite-contacts-per-trialist.csv"))
