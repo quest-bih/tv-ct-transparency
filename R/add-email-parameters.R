@@ -1,21 +1,12 @@
 library(dplyr)
 library(readr)
-library(stringr)
+library(here)
 
-data <- read_csv("data/processed/charite-contacts-per-trialist.csv")
+data <- read_csv(here("data", "processed", "charite-contacts-per-trialist.csv"))
 
 email_parameters <- data %>%
 
-  # Remove a duplicate trialist with flipped name
-  filter(name != "Worm Margitta") %>%
-
   mutate(
-    name_for_file = gsub("\\.", "", name),
-    name_for_file = str_replace_all(name_for_file, "ä", "ae"),
-    name_for_file = str_replace_all(name_for_file, "ö", "oe"),
-    name_for_file = str_replace_all(name_for_file, "ü", "ue"),
-    name_for_file = tolower(name_for_file),
-    name_for_file = str_replace_all(name_for_file, " ", "-"),
     launch_email_html = paste0("0_email/", name_for_file, ".html"),
     reminder_email_2_html = paste0("2_email/", name_for_file, ".html"),
     reminder_email_3_html = paste0("3_email/", name_for_file, ".html"),
@@ -24,4 +15,4 @@ email_parameters <- data %>%
     subject_message = "Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"
   )
 
-write_csv(email_parameters, "data/processed/email_parameters.csv")
+write_csv(email_parameters, here("data", "processed", "email_parameters.csv"))

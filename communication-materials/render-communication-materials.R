@@ -15,21 +15,7 @@ dir_materials <- dir_create(here::here("communication-materials", "materials"))
 dir_templates <- here::here("communication-materials", "templates")
 
 trialists <-
-  read_csv(here("data", "processed", "charite-contacts-per-trialist.csv")) %>%
-
-  # Remove a duplicate trialist with flipped name
-  filter(name != "Worm Margitta") %>%
-
-  # Create filename from trialist name
-  mutate(filename =
-           name %>%
-           str_remove_all(., "\\." ) %>%
-           str_replace_all(., "ä", "ae") %>%
-           str_replace_all(., "ö", "oe") %>%
-           str_replace_all(., "ü", "ue") %>%
-           str_to_lower(.) %>%
-           str_replace_all(" ", "-")
-  )
+  read_csv(here("data", "processed", "charite-contacts-per-trialist.csv"))
 
 # How many trialists have how many trials?
 count(trialists, n_trials)
@@ -105,12 +91,12 @@ trialists_one_trial <-
   left_join(trackvalue, by = "id") %>%
   mutate(crossreg = replace_na(crossreg, ""))
 
-render_0_one_trial <- function(name, id, registry, registration, title, completion_year, crossreg, filename, survey_link, type, ...){
+render_0_one_trial <- function(name, id, registry, registration, title, completion_year, crossreg, name_for_file, survey_link, type, ...){
 
   if (!type %in% c("letter", "email")) stop("`type` must be 'letter' or 'email'")
 
   out_dir <- dir_create(path(dir_materials, glue("0_{type}")))
-  out_file <- path(out_dir, filename, ext = ifelse(type == "letter", "pdf", "md"))
+  out_file <- path(out_dir, name_for_file, ext = ifelse(type == "letter", "pdf", "md"))
 
   if (!file_exists(out_file)){
     rmarkdown::render(
@@ -177,12 +163,12 @@ trialists_multi_trial <-
   tidyr::nest(trials = c(id, registry, registration, title, completion_year, crossreg)) %>%
   ungroup()
 
-render_0_multi_trial <- function(name, registries, completion_years, trials, filename, survey_link, type, ...){
+render_0_multi_trial <- function(name, registries, completion_years, trials, name_for_file, survey_link, type, ...){
 
   if (!type %in% c("letter", "email")) stop("`type` must be 'letter' or 'email'")
 
   out_dir <- dir_create(path(dir_materials, glue("0_{type}")))
-  out_file <- path(out_dir, filename, ext = ifelse(type == "letter", "pdf", "md"))
+  out_file <- path(out_dir, name_for_file, ext = ifelse(type == "letter", "pdf", "md"))
 
   if (!file_exists(out_file)){
     rmarkdown::render(
@@ -217,8 +203,8 @@ letters <-
   path_file() %>%
   path_ext_remove()
 
-all(letters %in% trialists$filename)
-all(trialists$filename %in% letters)
+all(letters %in% trialists$name_for_file)
+all(trialists$name_for_file %in% letters)
 
 
 # Prepare 1 (reminder,  cvk) ----------------------------------------------
@@ -231,7 +217,7 @@ rmarkdown::render(
 
 # Prepare 2 (reminder) ----------------------------------------------------
 
-render_reminder <- function(name, filename, survey_link, n_reminder, ...){
+render_reminder <- function(name, name_for_file, survey_link, n_reminder, ...){
 
   out_dir <- dir_create(path(dir_materials, glue("{n_reminder}_email")))
 
@@ -242,7 +228,7 @@ render_reminder <- function(name, filename, survey_link, n_reminder, ...){
     ),
     input = path(dir_templates, glue("{n_reminder}_email.Rmd")),
     output_dir = out_dir,
-    output_file = filename
+    output_file = name_for_file
   )
 
   try(file_copy(path(dir_templates, "template.html"), path(out_dir, "template.html"), overwrite = FALSE), silent = TRUE)
@@ -278,9 +264,9 @@ trialists %>%
 # cd ../4_email
 # find ./ -iname "*.md" -type f -exec sh -c 'pandoc --template=template.html "${0}" -o "${0%.md}.html"' {} \;
 
-# dir_ls(dir_materials, regexp = "email") %>%
-#   dir_ls(regexp = ".md") %>%
-#   file_delete()
+dir_ls(dir_materials, regexp = "email") %>%
+  dir_ls(regexp = ".md") %>%
+  file_delete()
 
 
 # Check all email created
@@ -289,5 +275,5 @@ emails <-
   path_file() %>%
   path_ext_remove()
 
-all(emails %in% trialists$filename)
-all(trialists$filename %in% emails)
+all(emails %in% trialists$name_for_file)
+all(trialists$name_for_file %in% emails)
