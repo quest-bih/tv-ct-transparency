@@ -454,6 +454,7 @@ tv_contacts <-
     name == "Andreas A. Michalsen" ~ "Andreas Michalsen",
     name == "David Manuel Leistner" ~ "David M. Leistner",
     name == "Markus Schuelke" ~ "Markus Schülke-Gerstenfeld",
+    name == "Worm Margitta" ~ "Margitta Worm",
     TRUE ~ name
   )) %>%
 
