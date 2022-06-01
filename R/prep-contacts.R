@@ -441,7 +441,7 @@ tv_contacts <-
     name == "Agnes Floeel" ~ "Agnes Flöel",
     name == "Anja Maehler" ~ "Anja Mähler",
     name == "Ingo Fietz" ~ "Ingo Fietze",
-    name == "Maurer (Ici) Marcus" ~ "Maurer Marcus",
+
     name == "Susanne Wiegand" ~ "Susanna Wiegand",
     name == "Thomas D. Halbig" ~ "Thomas D. Hälbig",
     name == "Ralf Trappe" ~ "Ralf U. Trappe",
@@ -455,6 +455,9 @@ tv_contacts <-
     name == "David Manuel Leistner" ~ "David M. Leistner",
     name == "Markus Schuelke" ~ "Markus Schülke-Gerstenfeld",
     name == "Worm Margitta" ~ "Margitta Worm",
+
+    # 2022-06-01: Correct duplicate trialist, incorrect in launch (2022-05-25)
+    name == "Maurer (Ici) Marcus" ~ "Marcus Maurer",
     TRUE ~ name
   )) %>%
 
