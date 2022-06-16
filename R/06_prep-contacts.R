@@ -536,7 +536,19 @@ tv_contacts_unique <-
   # Collapse same name for same trial
   group_by(id, name) %>%
   summarise(across(everything(), paste_rows)) %>%
-  ungroup()
+  ungroup() %>%
+
+  # 2022-06-16: Fix comma in email and assert no commas
+  mutate(email = if_else(
+    str_detect(email, "charite,de"),
+    str_replace(email, "charite,de", "charite.de"),
+    email)
+  )
+
+if (nrow(filter(tv_contacts_unique, str_detect(email, ","))) > 0){
+  message("There is a comma in one or more emails!")
+}
+
 
 # Limit to charite contacts -----------------------------------------------
 
