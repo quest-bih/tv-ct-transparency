@@ -20,3 +20,6 @@ report-cards/reports/
 # Communication materials
 communication-materials/materials/
 communication-materials/templates/signature-letter.pdf
+
+# Email logs
+data/raw/emails/
