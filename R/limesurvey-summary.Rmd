@@ -1,0 +1,62 @@
+---
+title: "TrackValue LimeSurvey Summary"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source(here::here("R", "explore-limesurvey.R"))
+source(here::here("R", "09_update-contacts.R"))
+```
+
+# Trialists/Trial Sample
+We sent emails to `r nrow(all_contacts)` trialists regarding `r nrow(all_trials)` trials. We excluded `r nrow(excluded_contacts)` trialists with undeliverable emails (and 2? trialists with auto-replies indicating extended leave throughout our study timeframe). After exclusions, `r nrow(included_contacts)` trialists and `r nrow(included_trials)` trials were included.
+
+# Survey Response Rate
+As of `r Sys.Date()`, there are `r nrow(ls)` complete survey responses. Survey responses are considered complete if all required likert items were completed. This includes some responses which were not submitted on the final page (n = `r ls %>% filter(!completed) %>% nrow()`). The current survey response rate is `r round(nrow(ls)/nrow(included_contacts)*100)`% (`r nrow(ls)`/`r nrow(included_contacts)`).
+
+
+## Response timeline
+The survey was launched on `r date_launch`. `r n_launch` responses were before reminder 1 from cvk on `r date_reminder_1`. `r n_reminder_1` responses were after reminder 1.
+
+## Materials
+`r n_no_materials` respondents reported not reviewing the materials prior to starting the survey. The survey prompted these respondents to review the materials and return to survey.
+
+## Likert
+Self-reported usefulness of the report card and infosheet varied widely, with slightly positive average.
+
+```{r likert}
+# likert_display
+likert_summary %>% 
+  select(-item) %>% 
+  mutate(across(-question, ~round(., 1))) %>% 
+  knitr::kable()
+```
+
+## Roles
+Most respondents were study leaders and/or doctors.
+
+```{r roles}
+plot_roles
+```
+
+
+## Corrections
+`r n_complete_corrections` complete responses included corrections. Corrections are separated from responses and will be analysed separately. As such, we include all corrections, including from incomplete survey responses (i.e., likert incomplete) and therefore have corrections from `r n_distinct(ls_corrections$id)` respondents (complete and partial); it looks like a respondent got stuck on the corrections because they didn't put a trn, so this is good to note for future survey design. Below are the corrections, which we are analyzing manually along with emailed corrections [separately](https://docs.google.com/spreadsheets/d/1ZUj03a8CVgJmeFdJIUXsgsEE-NwvQt8NhJcLzoeE9Do/edit).
+
+```{r corrections}
+ls_corrections %>% 
+  select(trn, correction) %>% 
+  knitr::kable()
+```
+
+## Changes and comments
+Some respondents suggested changes and/or provided comments, which we should analyze/address manually separately. TODO: We should decide how/where to do this.
+
+```{r changes-comments}
+changes_comments %>% 
+  mutate(text = paste0("- ", type, ": ", text)) %>% 
+  select(text) %>% 
+  knitr::kable()
+  # cat(sep = "\n")
+```

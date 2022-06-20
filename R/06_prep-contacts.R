@@ -536,7 +536,19 @@ tv_contacts_unique <-
   # Collapse same name for same trial
   group_by(id, name) %>%
   summarise(across(everything(), paste_rows)) %>%
-  ungroup()
+  ungroup() %>%
+
+  # 2022-06-16: Fix comma in email and assert no commas
+  mutate(email = if_else(
+    str_detect(email, "charite,de"),
+    str_replace(email, "charite,de", "charite.de"),
+    email)
+  )
+
+if (nrow(filter(tv_contacts_unique, str_detect(email, ","))) > 0){
+  message("There is a comma in one or more emails!")
+}
+
 
 # Limit to charite contacts -----------------------------------------------
 
@@ -724,87 +736,4 @@ drks_trials_study_leads %>%
   filter(registry == "DRKS") %>%
   count(is_scientific_public)
 
-
-# Structure charite contacts ----------------------------------------------
-
-# tv_charite_contacts: row per trial, per trialist
-# tv_charite_contacts_per_trial: row per trial (with all trialists)
-# tv_charite_contacts_per_trialist: row per trialist (with all trials)
-
-# Explore multiple contacts per trial
-tv_charite_contacts_per_trial <-
-  tv_charite_contacts %>%
-
-  group_by(id) %>%
-
-  # How many contacts?
-  add_count(name = "n_contacts") %>%
-
-  # Which contacts?
-  mutate(contacts = paste_rows(name)) %>%
-
-  ungroup() %>%
-  distinct(id, registry, n_contacts, contacts) %>%
-  arrange(desc(n_contacts))
-
-# How many trials with each number of contacts per registry?
-tv_charite_contacts_per_trial %>%
-  count(registry, n_contacts, name = "n_trials")
-
-# For example, which contacts for trial with most contacts?
-tv_charite_contacts_per_trial %>%
-  slice_head(n = 1) %>%
-  semi_join(tv_charite_contacts, ., by = "id") %>%
-  select(name, contact_type, title, position)
-
-# Explore multiple trials per contact
-tv_charite_contacts_per_trialist <-
-  tv_charite_contacts %>%
-
-  group_by(name) %>%
-
-  # How many trials?
-  add_count(name = "n_trials") %>%
-
-  # Which trials?
-  mutate(ids = paste_rows(id)) %>%
-
-  ungroup() %>%
-
-  distinct(name, n_trials, ids, email, trial_email, title) %>%
-
-  # Two trialists appear twice because of trials emails, so collapse
-  group_by(name) %>%
-  mutate(trial_email = paste_rows(trial_email)) %>%
-  ungroup() %>%
-  distinct() %>%
-
-  arrange(desc(n_trials))
-
-# How many contacts with each number of trials per registry?
-tv_charite_contacts_per_trialist %>%
-  count(n_trials, name = "n_contacts")
-
-# For example, which trials for contact with most trials?
-tv_charite_contacts_per_trialist %>%
-  slice_head(n = 1) %>%
-  semi_join(tv_charite_contacts, ., by = "name") %>%
-  select(name, registry, id)
-
-# Create filename from trialist name
-tv_charite_contacts_per_trialist <-
-  tv_charite_contacts_per_trialist %>%
-
-  mutate(name_for_file =
-           name %>%
-           str_remove_all(., "\\." ) %>%
-           str_replace_all(., "ä", "ae") %>%
-           str_replace_all(., "ö", "oe") %>%
-           str_replace_all(., "ü", "ue") %>%
-           str_to_lower(.) %>%
-           str_replace_all(" ", "-")
-  )
-
 write_csv(tv_charite_contacts, here("data", "processed", "charite-contacts.csv"))
-write_csv(tv_charite_contacts_per_trial, here("data", "processed", "charite-contacts-per-trial.csv"))
-write_csv(tv_charite_contacts_per_trialist, here("data", "processed", "charite-contacts-per-trialist.csv"))
