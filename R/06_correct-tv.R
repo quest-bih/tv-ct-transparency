@@ -42,6 +42,12 @@ trackvalue %>%
 trackvalue_corrected <-
   trackvalue %>%
 
+  # "DRKS00003568" add drks link (no doi/pmid link)
+  rows_update(
+    tibble(id = "DRKS00003568", has_reg_pub_link = TRUE),
+    by = "id"
+  ) %>%
+
   # "NCT02509962" add publication (10.1038/nature24628) and links/oa
   rows_update(
     tibble(
