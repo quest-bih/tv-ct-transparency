@@ -23,5 +23,3 @@
 {"timestamp": "2022-05-19T17:26:16+0200", "log_lvl": "INFO", "log_msg": "DRKS"}
 {"timestamp": "2022-05-19T22:42:45+0200", "log_lvl": "INFO", "log_msg": "Unpaywall"}
 {"timestamp": "2022-05-19T22:45:27+0200", "log_lvl": "INFO", "log_msg": "ShareYourPaper"}
-{"timestamp": "2022-05-24T11:19:16+0200", "log_lvl": "INFO", "log_msg": "Historical CTGOV"}
-{"timestamp": "2022-05-24T11:21:20+0200", "log_lvl": "INFO", "log_msg": "Historical DRKS"}
