@@ -52,7 +52,7 @@ trackvalue <-
     id = "NCT01984788",
     has_ft = TRUE,
     ft_source = "doi",
-    has_iv_trn_ft = FALSE
+    has_iv_trn_ft = TRUE
   ), by = "id") %>%
 
   # Checked for crossreg in ft -> none
