@@ -1,15 +1,15 @@
 # Via trialist feedback (survey/emails), we discovered some corrections to the dataset, including a bug in the DRKS links code. We update the report cards for reminder 2 to reflect this. We also edit the reminder email for these trials.
 
-# Corrected via IntoValue:
+# Corrected in IntoValue:
 # "DRKS00009368" # add drks link
 # "DRKS00009391" # add drks link
 # "DRKS00009539" # add drks link
 # "DRKS00012795" # add drks link
 # "DRKS00004649" # add drks link
-# "DRKS00003568" # add drks link (no doi/pmid link)
-# "NCT01984788"  # add euctr crossreg (2013-002319-82)
 
-# Corrected manually:
+# Corrected in TrackValue:
+# "NCT01984788"  # add euctr crossreg (2013-002319-82) [see `create-tv-sample.R` and `check-crossreg.R`]
+# "DRKS00003568" # add drks link (no doi/pmid link)
 # "NCT02509962" # add publication (10.1038/nature24628) and links/oa
 # "NCT01266655" # change publication (10.1016/j.euroneuro.2015.04.002), change links/oa, add euctr crossreg (2010-021861-62)
 
@@ -60,7 +60,7 @@ trackvalue_corrected <-
       has_iv_trn_abstract = FALSE,
       has_iv_trn_secondary_id = FALSE,
       has_iv_trn_ft = TRUE,
-      has_reg_pub_link = FALSE, # updated since intervention
+      has_reg_pub_link = FALSE, # FALSE since linked since intervention
       is_oa = TRUE,
       is_closed_archivable = NA,
     ),
