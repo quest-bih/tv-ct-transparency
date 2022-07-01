@@ -31,7 +31,23 @@ contacts_last <-
 
 # Prepare email logs ------------------------------------------------------
 
-email_log_path <- here("data", "raw", "emails", "0_email.txt")
+# Number of email indicates launch/reminders
+# NOTE: Change this to check different logs
+n_email <- 2
+
+# Specificy subject and sender based on number
+if (n_email == 0){
+  email_subject <- "Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"
+  email_sender <- "quest-trackvalue"
+} else if (n_email == 1){
+  email_subject <- "Erinnerung: Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"
+  email_sender <- "christof.kalle"
+} else if (n_email == 2){
+  email_subject <- "Erinnerung: Pilotstudie zur Transparenz Ihrer klinischen Studie(n)"
+  email_sender <- "quest-trackvalue"
+}
+
+email_log_path <- here("data", "raw", "emails", paste0(n_email, "_email.txt"))
 
 email_log_raw <-
   read_delim(email_log_path, col_names = "value", delim = "\n", locale = locale(encoding = "latin1"))
@@ -64,8 +80,8 @@ email_sent <-
 
   # Emails sent with specified subject and from
   filter(
-    subject == "Pilotstudie zur Transparenz Ihrer klinischen Studie(n)" &
-      from == "quest-trackvalue@bih-charite.de"
+    subject == email_subject &
+      str_detect(from, email_sender)
   ) %>%
 
   # Some "to" are emails and others are names, so clean to emails only
@@ -102,8 +118,8 @@ email_issues <-
 
   # Emails with issues with any other subject or from
   filter(
-    subject != "Pilotstudie zur Transparenz Ihrer klinischen Studie(n)" |
-      from != "quest-trackvalue@bih-charite.de"
+    subject != email_subject |
+      str_detect(from, email_sender, negate = TRUE)
   )
 
 # Check that all emails either sent or issue
@@ -111,7 +127,8 @@ if(nrow(email_sent) + nrow(email_issues) != nrow(email_log)) {
   message("Not all emails in log either sent or issue!")
 }
 
-# Most (n = 43) emails issues "undeliverable" with some (n = 4) auto replies
+# From email 1 (launch), most (n = 43) emails issues "undeliverable" with some (n = 4) auto replies
+# From email 2 (reminder), most (n = 44) emails issues "undeliverable" with some (n = 2) auto replies
 count(email_issues, subject)
 
 
@@ -119,10 +136,14 @@ count(email_issues, subject)
 
 email_undeliverable <-
   email_issues %>%
-  filter(subject == "Undeliverable: Pilotstudie zur Transparenz Ihrer klinischen Studie(n)") %>%
+  filter(subject == paste0("Undeliverable: ", email_subject)) %>%
 
   # "to" should be email address
-  mutate(to = if_else(to == "Megow, Inna", "inna.megow@charite.de", to))
+  mutate(to = case_when(
+    to == "Megow, Inna" ~ "inna.megow@charite.de",
+    to == "Vlatsas, Stergios" ~ "stergios.vlatsas@charite.de",
+    TRUE ~ to
+  ))
 
 # Check that all email_undeliverable "to" are email addresses
 if (nrow(filter(email_undeliverable, str_detect(to, "@", negate = TRUE)))){
@@ -138,7 +159,7 @@ anti_join(email_undeliverable, all_emails, by = c("to" = "email"))
 
 email_auto_reply <-
   email_issues %>%
-  filter(subject != "Undeliverable: Pilotstudie zur Transparenz Ihrer klinischen Studie(n)")
+  filter(subject != paste0("Undeliverable: ", email_subject))
 
 # Gather email info -------------------------------------------------------
 
@@ -148,8 +169,13 @@ email_info <-
     sent =
       if_else(email %in% sent_emails, TRUE, FALSE) %>%
       if_else(email_type == "trial", NA, .),
-    delivered = if_else(email %in% email_undeliverable$to, FALSE, TRUE)
+    delivered = case_when(
+      n_email == 1 ~ NA, # undeliverable notices sent to cvk so unknown
+      email %in% email_undeliverable$to ~ FALSE,
+      TRUE ~ TRUE
+    )
   )
+
 
 
 # Explore emails ----------------------------------------------------------
@@ -172,4 +198,28 @@ delivered_emails <-
   email_info %>%
   filter(sent & delivered)
 
-write_csv(email_info, here("data", "processed", "email-delivery-info.csv"))
+
+# Save email info ---------------------------------------------------------
+
+# Add email number
+email_delivery_info <-
+  email_info %>%
+  rename_with(~ paste0(n_email, "_", .), c(sent, delivered))
+
+# Check if previously saved email delivery info and, if so, read in (and append)
+email_delivery_info_path <- here("data", "processed", "email-delivery-info.csv")
+
+if (fs::file_exists(email_delivery_info_path)) {
+
+  email_delivery_info <-
+    read_csv(email_delivery_info_path) %>%
+
+    # If same columns in old and new, remove old
+    select(-(intersect(colnames(email_delivery_info), colnames(.))), email_type, email) %>%
+    # rename_with(~ paste0(n_email, "_", .), c(sent, delivered)) %>%
+    # select(-colnames(email_delivery_info), email_type, email) %>%
+
+    full_join(email_delivery_info, ., by = c("email_type", "email"))
+}
+
+write_csv(email_delivery_info, here("data", "processed", "email-delivery-info.csv"))
