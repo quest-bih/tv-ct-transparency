@@ -7,9 +7,10 @@ library(stringr)
 contacts <- read_csv(here("data", "processed", "charite-contacts.csv"))
 email_info <- read_csv(here("data", "processed", "email-delivery-info.csv"))
 
+# TODO: Decide whether email undeliverable if ANY or ALL undelivered. For now, ALL.
 undeliverable_emails <-
   email_info %>%
-  filter(!delivered) %>%
+  filter(!`0_delivered` & !`2_delivered`) %>%
   pull(email) %>%
   paste(collapse = "|")
 

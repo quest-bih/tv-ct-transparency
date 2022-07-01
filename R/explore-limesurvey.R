@@ -214,6 +214,7 @@ nrow(ls)
 # Explore dates
 date_launch <- lubridate::ymd("2022-05-25")
 date_reminder_1 <- lubridate::ymd("2022-06-03") #cvk
+date_reminder_2 <- lubridate::ymd("2022-06-29")
 
 # Check that none before launch
 filter(ls, start < date_launch)
@@ -224,10 +225,15 @@ n_launch <-
   filter(start >= date_launch & start < date_reminder_1) %>%
   nrow()
 
-# How many after reminder 1?
+# How many after reminder 1 and before reminder 2?
 n_reminder_1 <-
   ls %>%
-  filter(start >= date_reminder_1) %>%
+  filter(start >= date_reminder_1 & start < date_reminder_2) %>%
+  nrow()
+
+n_reminder_2 <-
+  ls %>%
+  filter(start >= date_reminder_2) %>%
   nrow()
 
 # How many self-report looking at materials before survey?
@@ -305,13 +311,7 @@ likert_data <-
   select(starts_with("reportcard"), starts_with("infosheet")) %>%
   pivot_longer(everything(), names_to = "item", values_to = "level") %>%
   group_by(item, level) %>%
-  summarise(n = n(), .groups = "drop") %>%
-  #TODO:make less hack-y
-  add_row(
-    item = "reportcard_inform",
-    level = "teils-teils",
-    n = 0
-  )
+  summarise(n = n(), .groups = "drop")
 
 # Get proportion of levels for each likert
 likert_prop <-

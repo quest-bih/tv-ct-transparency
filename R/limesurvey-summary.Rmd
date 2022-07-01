@@ -17,7 +17,7 @@ As of `r Sys.Date()`, there are `r nrow(ls)` complete survey responses. Survey r
 
 
 ## Response timeline
-The survey was launched on `r date_launch`. `r n_launch` responses were before reminder 1 from cvk on `r date_reminder_1`. `r n_reminder_1` responses were after reminder 1.
+The survey was launched on `r date_launch`. `r n_launch` responses were before reminder 1 from cvk on `r date_reminder_1`. An additional `r n_reminder_1` responses were after reminder 1 (`r date_reminder_1`), and `r n_reminder_2` responses were after reminder 2 (`r date_reminder_2`). 
 
 ## Materials
 `r n_no_materials` respondents reported not reviewing the materials prior to starting the survey. The survey prompted these respondents to review the materials and return to survey.
