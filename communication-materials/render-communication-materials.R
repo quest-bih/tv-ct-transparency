@@ -28,6 +28,14 @@ crossreg_raw <-  read_csv(here::here("data", "processed", "crossreg.csv"), show_
 crossreg <-
   crossreg_raw %>%
   filter(resolves & matches) %>%
+
+  # Add NCT01266655 euctr crossreg (2010-021861-62)
+  add_row(
+    id = "NCT01266655",
+    crossreg_trn = "2010-021861-62",
+    crossreg_registry = "EudraCT"
+  ) %>%
+
   mutate(
     crossreg_url = case_when(
       crossreg_registry == "ClinicalTrials.gov" ~
@@ -234,10 +242,31 @@ render_reminder <- function(name, name_for_file, survey_link, n_reminder, ...){
   try(file_copy(path(dir_templates, "template.html"), path(out_dir, "template.html"), overwrite = FALSE), silent = TRUE)
 }
 
+# Based on survey/email feedback, some report cards corrected and receive different email
+trials_corrected_report_card <- c(
+  "DRKS00009368",
+  "DRKS00009391",
+  "DRKS00009539",
+  "DRKS00012795",
+  "DRKS00004649",
+  "DRKS00003568",
+  "NCT01984788" ,
+  "NCT02509962",
+  "NCT01266655"
+) %>% str_c(collapse = "|")
 
+# Corrected
 trialists %>%
+  filter(str_detect(ids, trials_corrected_report_card)) %>%
+  purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = "2_corrected")
+
+# Uncorrected
+trialists %>%
+  filter(str_detect(ids, trials_corrected_report_card, negate = TRUE)) %>%
   # slice_tail(n = test_n) %>%
   purrr::pwalk(render_reminder, survey_link = survey_link, n_reminder = 2)
+
+# Note: Manually combined into "2_email" directory
 
 # Prepare 3 (reminder) ----------------------------------------------------
 
@@ -271,7 +300,7 @@ dir_ls(dir_materials, regexp = "email") %>%
 
 # Check all email created
 emails <-
-  dir_ls(path(dir_materials, "4_email"), regexp = "template", invert = TRUE) %>%
+  dir_ls(path(dir_materials, "2_email"), regexp = "template", invert = TRUE) %>%
   path_file() %>%
   path_ext_remove()
 

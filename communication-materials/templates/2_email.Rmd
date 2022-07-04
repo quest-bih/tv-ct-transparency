@@ -7,9 +7,13 @@ output: md_document
 
 Sehr geehrte/r `r params$name`,
 
-am 25. Mai haben wir Ihnen ein individuelles Feedback und Hinweise zu Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben. Sie haben die Möglichkeit, zu einer höheren Transparenz klinischer Studien an der Charité beizutragen und Materialien mitzugestalten, die für zukünftige Studien an der Charité oder auch an anderen deutschen Universitätskliniken übernommen werden können.
+am 25. Mai haben wir Ihnen im Rahmen einer Pilotstudie ein individuelles Feedback und Hinweise zu Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben. Sie haben die Möglichkeit, zu einer höheren Transparenz klinischer Studien an der Charité beizutragen und Materialien mitzugestalten, die für zukünftige Studien an der Charité oder auch an anderen deutschen Universitätskliniken übernommen werden können.
 
-Falls Sie es noch nicht getan haben, laden wir Sie ein, Ihre Materialien durchzusehen und die kurze (5-minütige), anonyme Umfrage auszufüllen: [`r params$survey_link`](`r params$survey_link`). Sollten für Ihre Studie(n) Verbesserungsmöglichkeiten bestehen, die wir empfehlen, zeigt Ihnen die Report Card diese auf. Wir werden Ihre Studie(n) im Rahmen unserer erwähnten Pilotstudie in 2,5 Monaten erneut bewerten.
+Falls Sie es noch nicht getan haben, laden wir Sie ein, Ihre Materialien durchzusehen und die kurze (5-minütige), anonyme Umfrage auszufüllen: [`r params$survey_link`](`r params$survey_link`). 
+
+Sollten für Ihre Studie(n) Verbesserungsmöglichkeiten bestehen, die wir prinzipiell empfehlen, zeigt Ihnen die Report Card diese auf. Bitte beachten Sie, dass Maßnahmen, die Sie seit dem Beginn unserer Pilotstudie ergriffen haben, um die Transparenz Ihrer Studien zu erhöhen, nicht in die Report Cards einfließen. Wir werden Ihre Studie(n) im Rahmen unserer erwähnten Pilotstudie in 1,5 Monaten erneut bewerten.
+
+Wenn durch unsere Methode eine Cross-Registrierung in EudraCT gefunden wurde, wurde dies in der jeweiligen Report Card angegeben. Wir bitten Sie, sich mit uns in Verbindung zu setzen (Survey oder E-Mail), sollte(n) Ihre Studie(n) auch in EudraCT registriert, aber in der Report Card nicht als solche gekennzeichnet sein.
 
 Wir danken Ihnen, dass Sie sich die Zeit nehmen, die Transparenz Ihrer Studie sicherzustellen, und uns dabei zu helfen, diese Materialien so informativ und hilfreich wie möglich zu gestalten.
 
