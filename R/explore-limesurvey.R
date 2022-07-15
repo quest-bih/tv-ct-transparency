@@ -126,6 +126,7 @@ ls <-
   # We keep incomplete responses as long mandatory likert complete
   filter(if_all(c(starts_with("reportcard"), starts_with("infosheet")), ~!is.na(.)))
 
+readr::write_csv(ls, here::here("data", "processed", "limesurvey-clean.csv"))
 
 # Get survey items --------------------------------------------------------
 
