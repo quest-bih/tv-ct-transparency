@@ -7,13 +7,11 @@ output: md_document
 
 Sehr geehrte/r `r params$name`,
 
-Wir haben Ihnen am 25. Mai ein individuelles Feedback und Anleitungen zur Transparenz Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben und Sie in dieser anonymen, 5-minütigen Umfrage um Ihre Meinung zu den Materialien gebeten: [`r params$survey_link`](`r params$survey_link`).
+Wir haben Ihnen am 25. Mai im Rahmen einer Pilotstudie ein individuelles Feedback und Hinweise zur Transparenz Ihrer klinischen Studie bzw. Ihren klinischen Studien gegeben. Ihr Feedback zu diesen Materialien ist uns sehr wichtig. Wir möchte sie verbessern, da sie möglicherweise für zukünftige Studien der Charité oder anderer deutscher Universitätskliniken übernommen werden.
 
-Einige [#] Ihrer Charité-Kolleg:innen haben bereits ihre Meinung zu der Report Card und dem Infosheet geäußert. Falls Sie es noch nicht getan haben, möchten wir Sie hiermit bitten, die kurze Umfrage auszufüllen, bevor sie **morgen** abläuft.
+Falls Sie es noch nicht getan haben, möchten wir Sie hiermit bitten, die anonyme, 5-minütige Umfrage auszufüllen. **Die Befragung steht Ihnen nur noch bis morgen** unter dem folgenden Link zur Beantwortung offen: [`r params$survey_link`](`r params$survey_link`).
 
-Wir freuen uns über Ihr Feedback, das uns helfen wird, diese Materialien zu verbessern, die möglicherweise für zukünftige Studien der Charité oder anderer deutscher Universitätskliniken übernommen werden.
-
-Sollten für Ihre Studie(n) Verbesserungsmöglichkeiten bestehen, die wir empfehlen, zeigt Ihnen die Report Card diese auf. Wir werden in 6 Wochen im Rahmen unserer erwähnten Pilotstudie eine weitere Evaluation der Transparenz Ihrer Studie durchführen.
+Sollten für Ihre Studie(n) Verbesserungsmöglichkeiten bestehen, die wir empfehlen, zeigt Ihnen die Report Card diese auf. Wir werden in **5 Wochen** im Rahmen unserer erwähnten Pilotstudie eine weitere Evaluation der Transparenz Ihrer Studie durchführen.
 
 Wir danken Ihnen für Ihre Mitarbeit.
 
