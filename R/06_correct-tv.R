@@ -13,6 +13,9 @@
 # "NCT02509962" # add publication (10.1038/nature24628) and links/oa
 # "NCT01266655" # change publication (10.1016/j.euroneuro.2015.04.002), change links/oa, add euctr crossreg (2010-021861-62)
 
+# Corrected in TrackValue --> to move to IntoValue:
+# "DRKS00011584" # change to has_summary_results [reminder 3]
+
 # No report card correction:
 # "DRKS00012665" add drks link but no pub in iv data
 
@@ -87,6 +90,13 @@ trackvalue_corrected <-
       is_prospective_eudract = TRUE,
       has_summary_results_eudract = TRUE
     ),
+    by = "id"
+  ) %>%
+
+  # 2022-07-15: "DRKS00011584" fix missing results date
+  # TODO: remove this once fixed upstream in intovalue
+  rows_update(
+    tibble(id = "DRKS00011584", has_summary_results = TRUE),
     by = "id"
   )
 
