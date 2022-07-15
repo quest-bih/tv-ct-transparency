@@ -115,7 +115,6 @@ ls_corrections <-
   pivot_wider(names_from = "type", values_from = "value") %>%
   rename(correction = trn_text)
 
-
 # Prepare survey ----------------------------------------------------------
 
 ls <-
@@ -240,7 +239,12 @@ n_reminder_2 <-
 n_no_materials <- ls %>% filter(!materials) %>% nrow()
 
 # How many have corrections?
-n_complete_corrections <- ls %>% filter(correction) %>% nrow()
+# Limit to those with correction content, not just self-regport
+n_complete_corrections <-
+  ls %>%
+  semi_join(ls_corrections, by = "id") %>%
+  filter(correction) %>%
+  nrow()
 
 # Look at changes and comments
 changes_comments <-
