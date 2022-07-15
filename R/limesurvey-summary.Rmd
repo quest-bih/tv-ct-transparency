@@ -6,7 +6,7 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 source(here::here("R", "explore-limesurvey.R"))
-source(here::here("R", "09_update-contacts.R"))
+source(here::here("R", "10_update-contacts.R"))
 ```
 
 # Trialists/Trial Sample
